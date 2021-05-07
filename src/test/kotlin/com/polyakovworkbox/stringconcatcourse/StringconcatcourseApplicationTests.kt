@@ -16,11 +16,11 @@ class StringConcatCourseApplicationTests {
 
 	@Test
 	fun contextLoads() {
-		mockMvc.get("/helloworld")
+		mockMvc.get("/")
 			.andExpect { status { is2xxSuccessful() } }
 			.andReturn()
 			.response.contentAsString
-			.apply { contains( "Hello world!" ) }
+			.apply { contains( "ci vis pacem para bellum" ) }
 	}
 
 }

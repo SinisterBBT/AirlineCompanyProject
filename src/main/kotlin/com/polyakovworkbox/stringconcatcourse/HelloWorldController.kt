@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class HelloWorldController {
 
-    @RequestMapping("/helloworld")
+    @RequestMapping("/")
     fun getHelloWorld() : String {
-        return "Hello world!"
+        return "ci vis pacem para bellum"
     }
 
 }
