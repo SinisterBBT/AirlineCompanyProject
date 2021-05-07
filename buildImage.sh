@@ -14,7 +14,10 @@ imageFullName=$repositoryName:$imageTag
 echo [Main App STARTING] building $imageFullName...
 
 echo [Main App] creating jar...
-(exec "${BASH_SOURCE%/*}/../gradlew" bootJar --no-daemon)
+
+currentfile=${BASH_SOURCE%/*}
+parentdir="$(dirname "$currentfile")"
+(exec "$parentdir/gradlew" bootJar --no-daemon)
 
 echo [Main App] creating docker image...
 docker build -t $imageFullName .
