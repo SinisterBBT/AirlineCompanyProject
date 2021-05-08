@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class StringConcatCourseApplication
 
 fun main(args: Array<String>) {
+	@Suppress("SpreadOperator")
 	runApplication<StringConcatCourseApplication>(*args)
 }

@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RestController
 class HelloWorldController {
 
     @RequestMapping("/")
-    fun getHelloWorld() : String {
+    fun getHelloWorld(): String {
+        @Suppress("FunctionOnlyReturningConstant")
         return "ci vis pacem para bellum"
     }
 
