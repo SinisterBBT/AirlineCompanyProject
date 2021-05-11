@@ -8,4 +8,4 @@ if [ -z "$1"]
     imageTag=latest
 fi
 
-(exec "${BASH_SOURCE%/*}\mainApp\buildImageWin.sh" $imageTag)
+(exec "${BASH_SOURCE%/*}\mainApp\buildImage.sh" $imageTag)
