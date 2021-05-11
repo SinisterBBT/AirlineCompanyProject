@@ -20,7 +20,7 @@ parentdir="$(dirname "$currentfile")"
 (exec "$parentdir/gradlew" bootJar --no-daemon)
 
 echo [Main App] creating docker image...
-docker build -t $imageFullName .
+docker build -t $imageFullName ${BASH_SOURCE%/*}
 
 echo [Main App FINISHED] image has been built
 
