@@ -9,7 +9,7 @@ class HelloWorldController {
     @RequestMapping("/")
     fun getHelloWorld(): String {
         @Suppress("FunctionOnlyReturningConstant")
-        return "ci vis pacem para bellum"
+        return "new version"
     }
 
 }
