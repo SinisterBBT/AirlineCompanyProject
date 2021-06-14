@@ -3,9 +3,9 @@ set -e
 
 imageTag=$1
 if [ -z "$1" ]
-  then
-    echo No image tag provided. latest will be used
-    imageTag=latest
+	then
+		echo No image tag provided. Latest will be used
+		imageTag=latest
 fi
 
 repositoryName=758121016477.dkr.ecr.us-east-2.amazonaws.com/mainapp
