@@ -13,10 +13,8 @@
 - Prod: [AWS console](https://us-east-2.console.aws.amazon.com/console/home?region=us-east-2)  
 
 ## Developer manual  
-### Building  
-Use build.sh script for simple local project building into docker image if you do not need to run anything. 
-### Running project locally
-Use run.sh 
+### Building and running locally
+Use run.sh script for simple local project building into docker image and running it.
 ### Deploying  
 Use deploy.sh script which pushes our local image to GitHub and then if all checks are successful it goes directly to AWS-based production.
 ### Branching strategy

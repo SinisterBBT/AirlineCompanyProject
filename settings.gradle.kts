@@ -1,2 +1,2 @@
 rootProject.name = "stringconcatcourse"
-include("mainApp")
+include(":mainApp")

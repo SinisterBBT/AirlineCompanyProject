@@ -11,19 +11,12 @@ dependencies {
 	implementation(Libs.kotlin_reflect)
 	implementation(Libs.kotlin_stdlib)
 
-	// spring
-	implementation(Libs.spring_boot_starter_web)
-	implementation(Libs.spring_boot_starter_thymeleaf)
-	implementation(Libs.spring_boot_starter_logging)
-
-	// jackson
-	implementation(Libs.jackson_kotlin)
-
 	// arrow
 	implementation(Libs.arrow)
 
-	// table
-	implementation(Libs.ascii_table)
+	// spring
+	implementation(Libs.spring_boot_starter_web)
+	implementation(Libs.spring_boot_starter_logging)
 
 	// logging
 	implementation(Libs.slf4j_api)

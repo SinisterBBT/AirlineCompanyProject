@@ -15,17 +15,14 @@ echo [Main App STARTING] building $imageFullName...
 
 echo [Main App] creating jar...
 
-(exec "./gradlew" clean --no-daemon)
-(exec "./gradlew" check --no-daemon)
-(exec "./gradlew" bootJar --no-daemon)
+./gradlew clean
+./gradlew check
+./gradlew bootJar
 
 echo [Main App] creating docker image...
 docker build -t $imageFullName "${BASH_SOURCE%/*}"
 
 echo [Main App FINISHED] image has been built
 
-if [ -z "$2" ]
-  then
-    echo [Main App] launching
-    (exec docker run $imageFullName)
-fi
+echo [Main App] launching
+docker run $imageFullName

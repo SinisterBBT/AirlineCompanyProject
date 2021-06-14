@@ -33,7 +33,6 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral()
-        mavenLocal()
     }
 
     detekt {
@@ -110,7 +109,6 @@ allprojects {
 
         withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
             kotlinOptions {
-                jvmTarget = "1.8"
                 jvmTarget = JavaVersion.VERSION_11.toString()
                 allWarningsAsErrors = failOnWarning
                 freeCompilerArgs = listOf("-Xjvm-default=enable")
