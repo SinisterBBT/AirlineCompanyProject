@@ -24,4 +24,8 @@ docker build -t $imageFullName "${BASH_SOURCE%/*}"
 
 echo [Main App FINISHED] image has been built
 
-(exec docker run $imageFullName)
+if [ -z "$2" ]
+  then
+    echo [Main App] launching
+    (exec docker run $imageFullName)
+fi

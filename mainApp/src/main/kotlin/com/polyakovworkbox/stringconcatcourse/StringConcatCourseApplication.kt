@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class StringConcatCourseApplication
 
 fun main(args: Array<String>) {
-	runApplication<StringConcatCourseApplication>(args[0])
+	runApplication<StringConcatCourseApplication>(*args)
 }
