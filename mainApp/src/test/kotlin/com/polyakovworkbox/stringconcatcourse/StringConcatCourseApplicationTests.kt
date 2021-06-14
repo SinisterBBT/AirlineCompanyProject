@@ -20,7 +20,6 @@ class StringConcatCourseApplicationTests {
 			.andExpect { status { is2xxSuccessful() } }
 			.andReturn()
 			.response.contentAsString
-			.apply { contains( "ci vis pacem para bellum" ) }
+			.apply { contains("ci vis pacem para bellum") }
 	}
-
 }

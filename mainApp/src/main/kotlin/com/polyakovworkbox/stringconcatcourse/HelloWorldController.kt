@@ -11,5 +11,4 @@ class HelloWorldController {
         val content = "ci vis pacem " + "para bellum"
         return content
     }
-
 }
