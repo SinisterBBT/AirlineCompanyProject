@@ -17,12 +17,9 @@ class StringConcatCourseApplicationTests {
 	@Test
 	fun contextLoads() {
 		mockMvc.get("/")
-			.andExpect { status { is4xxClientError() } }
+			.andExpect { status { is2xxSuccessful() } }
 			.andReturn()
 			.response.contentAsString
-			.apply { contains( "ci vis pacem para bellum" ) }
-
-
+			.apply { contains("ci vis pacem para bellum") }
 	}
-
 }

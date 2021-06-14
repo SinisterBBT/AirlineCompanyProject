@@ -8,8 +8,7 @@ class HelloWorldController {
 
     @RequestMapping("/")
     fun getHelloWorld(): String {
-        @Suppress("FunctionOnlyReturningConstant")
-        return "new version"
+        val content = "ci vis pacem " + "para bellum"
+        return content
     }
-
 }
