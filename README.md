@@ -19,5 +19,5 @@ Use run.sh script for simple local project building into docker image and runnin
 Use deploy.sh script which pushes our local image to GitHub and then if all checks are successful it goes directly to AWS-based production.
 ### Branching strategy
 Please follow [GitHub flow](https://guides.github.com/introduction/flow/) branching strategy 
-
+``
   
