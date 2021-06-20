@@ -1,3 +1,0 @@
-package com.polyakovworkbox.stringconcatcourse.aircraftCheckManagement.domain
-
-class Flight

@@ -1,3 +1,0 @@
-package com.polyakovworkbox.stringconcatcourse.fleetManagement.domain
-
-class Aircraft

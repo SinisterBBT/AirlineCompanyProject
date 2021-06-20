@@ -1,6 +1,6 @@
 package com.polyakovworkbox.stringconcatcourse.configuration
 
-/*import com.polyakovworkbox.stringconcatcourse.aircraftCheckManagement.domain.Flight
+/*import com.polyakovworkbox.stringconcatcourse.aircraftCheckManagement.domain.flight.Flight
 import org.springframework.context.annotation.Bean*/
 import org.springframework.context.annotation.Configuration
 
