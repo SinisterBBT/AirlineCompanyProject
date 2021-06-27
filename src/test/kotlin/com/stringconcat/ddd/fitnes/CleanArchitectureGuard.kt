@@ -39,8 +39,8 @@ class CleanArchitectureGuard {
             .resideInAnyPackage("com.polyakovworkbox.stringconcatcourse.aircraftCheckManagement.domain..")
         .should().onlyDependOnClassesThat()
         .resideInAnyPackage(
-            "com.polyakovworkbox.stringconcatcourse.fleetManagement.domain..",
-            "com.polyakovworkbox.stringconcatcourse.flightsAndSeatsManagement.domain..",
+            "com.polyakovworkbox.stringconcatcourse.aircraftCheckManagement.domain..",
+            "com.polyakovworkbox.stringconcatcourse.common..",
             "kotlin..",
             "java..",
             "org.jetbrains.annotations..",
@@ -53,9 +53,10 @@ class CleanArchitectureGuard {
             .resideInAnyPackage("com.polyakovworkbox.stringconcatcourse.fleetManagement.domain..")
         .should().onlyDependOnClassesThat()
         .resideInAnyPackage(
-            "com.polyakovworkbox.stringconcatcourse.aircraftCheckManagement.domain..",
-            "com.polyakovworkbox.stringconcatcourse.flightsAndSeatsManagement.domain..",
+            "com.polyakovworkbox.stringconcatcourse.fleetManagement.domain..",
+            "com.polyakovworkbox.stringconcatcourse.common..",
             "kotlin..",
+            "kotlin.collections..",
             "java..",
             "org.jetbrains.annotations..",
             "arrow.core.."
@@ -67,8 +68,8 @@ class CleanArchitectureGuard {
             .resideInAnyPackage("com.polyakovworkbox.stringconcatcourse.flightsAndSeatsManagement.domain..")
         .should().onlyDependOnClassesThat()
         .resideInAnyPackage(
-            "com.polyakovworkbox.stringconcatcourse.aircraftCheckManagement.domain..",
-            "com.polyakovworkbox.stringconcatcourse.fleetManagement.domain..",
+            "com.polyakovworkbox.stringconcatcourse.flightsAndSeatsManagement.domain..",
+            "com.polyakovworkbox.stringconcatcourse.common..",
             "kotlin..",
             "java..",
             "org.jetbrains.annotations..",

@@ -8,6 +8,9 @@ complexity:
     functionThreshold: 12
     constructorThreshold: 12
     ignoreDefaultParameters: true
+  NestedBlockDepth:
+    threshold: 6
+
 
     
 formatting:

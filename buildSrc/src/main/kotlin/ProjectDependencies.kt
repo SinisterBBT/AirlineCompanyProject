@@ -3,7 +3,7 @@ object LibVers {
     const val spring_boot = "2.5.1"
     const val junit = "5.7.2"
     const val kotest = "4.4.3"
-    const val arrow = "0.13.2"
+    const val arrow = "0.11.0"
     const val slf4j = "1.7.30"
     const val arch_unit = "0.18.0"
 
