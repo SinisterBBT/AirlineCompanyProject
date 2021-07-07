@@ -10,7 +10,6 @@ import java.time.LocalDate
 class AircraftManufactureDate internal constructor(val manufactureDate: LocalDate) : ValueObject {
 
     companion object {
-
         fun from(manufactureDate: LocalDate): Either<ManufactureDateInFutureError, AircraftManufactureDate> =
             if (manufactureDate.isBefore(LocalDate.now().plusDays(1))) {
                 AircraftManufactureDate(manufactureDate).right()
