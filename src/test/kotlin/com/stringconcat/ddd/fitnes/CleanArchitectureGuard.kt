@@ -11,18 +11,18 @@ class CleanArchitectureGuard {
 
     @ArchIgnore
     @ArchTest
-    val `onion architecture should be followed for fleetManagement` =
+    val `onion architecture should be followed for leasing` =
         Architectures.onionArchitecture()
-            .domainModels("com.polyakovworkbox.stringconcatcourse.fleetManagement.domain..")
-            .domainServices("com.polyakovworkbox.stringconcatcourse.fleetManagement.domain..")
+            .domainModels("com.polyakovworkbox.stringconcatcourse.leasing.domain..")
+            .domainServices("com.polyakovworkbox.stringconcatcourse.leasing.domain..")
 
     @ArchTest
-    val `fleetManagement business logic should depends only on approved packages` =
+    val `leasing business logic should depends only on approved packages` =
         ArchRuleDefinition.classes().that()
-            .resideInAnyPackage("com.polyakovworkbox.stringconcatcourse.fleetManagement.domain..")
+            .resideInAnyPackage("com.polyakovworkbox.stringconcatcourse.leasing.domain..")
         .should().onlyDependOnClassesThat()
         .resideInAnyPackage(
-            "com.polyakovworkbox.stringconcatcourse.fleetManagement.domain..",
+            "com.polyakovworkbox.stringconcatcourse.leasing.domain..",
             "com.polyakovworkbox.stringconcatcourse.common..",
             "kotlin..",
             "kotlin.collections..",

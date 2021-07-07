@@ -1,10 +1,7 @@
 package com.polyakovworkbox.stringconcatcourse.configuration
 
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Import
 
 @Configuration
-@Import(
-        LeasingConfiguration::class,
-)
-class ApplicationConfiguration
+@Suppress("TooManyFunctions")
+class LeasingConfiguration

@@ -8,7 +8,7 @@ dependencies {
 
 	//project
 	implementation(project(":common:types"))
-	implementation(project(":fleetManagement:domain"))
+	implementation(project(":leasing:domain"))
 
 	// kotlin
 	implementation(Libs.kotlin_jdk8)
