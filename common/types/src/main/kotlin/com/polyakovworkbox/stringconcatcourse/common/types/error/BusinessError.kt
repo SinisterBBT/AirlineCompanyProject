@@ -1,0 +1,3 @@
+package com.polyakovworkbox.stringconcatcourse.common.types.error
+
+interface BusinessError
