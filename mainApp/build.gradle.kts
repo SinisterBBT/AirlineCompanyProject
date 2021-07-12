@@ -9,6 +9,7 @@ dependencies {
 	//project
 	implementation(project(":common:types"))
 	implementation(project(":leasing:domain"))
+	implementation(project(":flightManagement:domain"))
 
 	// kotlin
 	implementation(Libs.kotlin_jdk8)
