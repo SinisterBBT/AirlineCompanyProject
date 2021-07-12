@@ -6,12 +6,14 @@ object AircraftRestorer {
 
     fun restoreAircraft(
         id: AircraftId,
+        aircraftRegistrationNumber: AircraftRegistrationNumber,
         model: AircraftModel,
         seatMap: AircraftSeatMap,
         version: Version
     ): Aircraft {
         return Aircraft(
             id,
+            aircraftRegistrationNumber,
             model,
             seatMap,
             version

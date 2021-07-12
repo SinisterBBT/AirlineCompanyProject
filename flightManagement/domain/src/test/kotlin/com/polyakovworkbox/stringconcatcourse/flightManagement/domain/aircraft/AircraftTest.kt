@@ -4,6 +4,7 @@ import aircraftModel
 import aircraftId
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import registrationNumber
 import seatMap
 
 internal class AircraftTest {
@@ -16,11 +17,13 @@ internal class AircraftTest {
 
     @Test
     fun `acquire info about new aircraft - success`() {
+        val registrationNumber = registrationNumber()
         val model = aircraftModel()
         val seatMap = seatMap()
 
         val result = Aircraft.acquireNewAircraft(
                 idGenerator,
+                registrationNumber,
                 model,
                 seatMap
         )
