@@ -8,11 +8,21 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.A
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftRegistrationNumber
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftSeatMap
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.Seat
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsAlreadyInFlightChecker
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsNotInOperationChecker
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AirportAllowsFlightChecker
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.ArrivalAirport
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.DepartureAirport
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.DepartureDate
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.ArrivalDate
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Flight
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightIdGenerator
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsAnnouncedChecker
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsToSoonForPublishingChecker
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketPrice
+import java.math.BigDecimal
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import kotlin.random.Random
@@ -57,7 +67,7 @@ fun seatMap(): AircraftSeatMap {
     return result.b
 }
 
-private val idGenerator = object : AircraftIdGenerator {
+val aircraftIdGenerator = object : AircraftIdGenerator {
     override fun generate() = aircraftId()
 }
 
@@ -65,7 +75,7 @@ private val idGenerator = object : AircraftIdGenerator {
 fun flightId() = FlightId(Random.nextLong())
 
 fun aircraft(): Aircraft {
-    return Aircraft.acquireNewAircraft(idGenerator, registrationNumber(), aircraftModel(), seatMap())
+    return Aircraft.acquireNewAircraft(aircraftIdGenerator, registrationNumber(), aircraftModel(), seatMap())
 }
 
 fun departureAirport(): DepartureAirport {
@@ -92,5 +102,75 @@ fun arrivalDate(): ArrivalDate {
     return result.b
 }
 
-// Aircraft restorer
+object AircraftIsInOperation : AircraftIsNotInOperationChecker {
+    override fun check(registrationNumber: AircraftRegistrationNumber) = true
+}
+
+object AircraftDoesNotExist : AircraftIsNotInOperationChecker {
+    override fun check(registrationNumber: AircraftRegistrationNumber) = false
+}
+
+object AircraftIsNotInFlight : AircraftIsAlreadyInFlightChecker {
+    override fun check(registrationNumber: AircraftRegistrationNumber) = false
+}
+
+object AircraftIsAlreadyInFlight : AircraftIsAlreadyInFlightChecker {
+    override fun check(registrationNumber: AircraftRegistrationNumber) = true
+}
+
+object AirportAllowsFlight : AirportAllowsFlightChecker {
+    override fun check(departureDate: DepartureDate) = true
+}
+
+object AirportDoesNotAllowFlight : AirportAllowsFlightChecker {
+    override fun check(departureDate: DepartureDate) = false
+}
+
+val flightIdGenerator = object : FlightIdGenerator {
+    override fun generate() = flightId()
+}
+
+// Ticket aggregate
+fun ticketId() = TicketId(Random.nextLong())
+
+fun flight(): Flight {
+    val result = Flight.announceNewFlight(
+            flightIdGenerator,
+            AircraftIsInOperation,
+            AircraftIsNotInFlight,
+            AirportAllowsFlight,
+            departureAirport(),
+            arrivalAirport(),
+            departureDate(),
+            arrivalDate(),
+            aircraft()
+    )
+
+    check(result is Either.Right<Flight>)
+    return result.b
+}
+
+fun ticketPrice(): TicketPrice {
+    val result = TicketPrice.from(BigDecimal(100))
+    check(result is Either.Right<TicketPrice>)
+    return result.b
+}
+
+object FlightIsAnnounced : FlightIsAnnouncedChecker {
+    override fun check(aircraftRegistrationNumber: AircraftRegistrationNumber, departureDate: DepartureDate) = true
+}
+
+object FlightIsNotAnnounced : FlightIsAnnouncedChecker {
+    override fun check(aircraftRegistrationNumber: AircraftRegistrationNumber, departureDate: DepartureDate) = false
+}
+
+object FlightIsToSoonForPublishing : FlightIsToSoonForPublishingChecker {
+    override fun check(aircraftRegistrationNumber: AircraftRegistrationNumber, departureDate: DepartureDate) = true
+}
+
+object FlightIsNotToSoonForPublishing : FlightIsToSoonForPublishingChecker {
+    override fun check(aircraftRegistrationNumber: AircraftRegistrationNumber, departureDate: DepartureDate) = false
+}
+
+// version
 fun version() = Version.new()

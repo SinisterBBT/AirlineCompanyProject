@@ -1,9 +1,14 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
 
+import AircraftDoesNotExist
+import AircraftIsAlreadyInFlight
+import AircraftIsInOperation
+import AircraftIsNotInFlight
+import AirportAllowsFlight
+import AirportDoesNotAllowFlight
 import aircraft
 import arrivalAirport
 import arrivalDate
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftRegistrationNumber
 import departureAirport
 import departureDate
 import flightId
@@ -18,30 +23,6 @@ internal class FlightTest {
 
     private val idGenerator = object : FlightIdGenerator {
         override fun generate() = aircraftId
-    }
-
-    private object AircraftIsInOperation : AircraftIsNotInOperationChecker {
-        override fun check(registrationNumber: AircraftRegistrationNumber) = true
-    }
-
-    private object AircraftDoesNotExist : AircraftIsNotInOperationChecker {
-        override fun check(registrationNumber: AircraftRegistrationNumber) = false
-    }
-
-    private object AircraftIsNotInFlight : AircraftIsAlreadyInFlightChecker {
-        override fun check(registrationNumber: AircraftRegistrationNumber) = false
-    }
-
-    private object AircraftIsAlreadyInFlight : AircraftIsAlreadyInFlightChecker {
-        override fun check(registrationNumber: AircraftRegistrationNumber) = true
-    }
-
-    private object AirportAllowsFlight : AirportAllowsFlightChecker {
-        override fun check(departureDate: DepartureDate) = true
-    }
-
-    private object AirportDoesNotAllowFlight : AirportAllowsFlightChecker {
-        override fun check(departureDate: DepartureDate) = false
     }
 
     @Test
