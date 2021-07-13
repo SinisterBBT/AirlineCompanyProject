@@ -19,10 +19,10 @@ import org.junit.jupiter.api.Test
 
 internal class FlightTest {
 
-    val aircraftId = flightId()
+    val flightId = flightId()
 
     private val idGenerator = object : FlightIdGenerator {
-        override fun generate() = aircraftId
+        override fun generate() = flightId
     }
 
     @Test

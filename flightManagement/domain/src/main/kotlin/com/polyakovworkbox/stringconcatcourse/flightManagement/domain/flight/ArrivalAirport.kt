@@ -5,7 +5,7 @@ import arrow.core.left
 import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 
-class ArrivalAirport(val iataCode: String) : ValueObject {
+class ArrivalAirport internal constructor(val iataCode: String) : ValueObject {
 
     companion object {
         private const val IATA_NUMBER_LENGTH = 3

@@ -18,9 +18,18 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Fli
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.ArrivalDate
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Flight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightIdGenerator
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Email
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Fio
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Order
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderItem
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Passenger
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.PassportData
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsAnnouncedChecker
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsToSoonForPublishingChecker
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Ticket
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketIdGenerator
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketPrice
 import java.math.BigDecimal
 import java.time.ZoneId
@@ -171,6 +180,44 @@ object FlightIsToSoonForPublishing : FlightIsToSoonForPublishingChecker {
 object FlightIsNotToSoonForPublishing : FlightIsToSoonForPublishingChecker {
     override fun check(aircraftRegistrationNumber: AircraftRegistrationNumber, departureDate: DepartureDate) = false
 }
+
+// Passenger VO
+fun fio(): Fio {
+    val result = Fio.from("Ivanov Ivan Ivanovich")
+    check(result is Either.Right<Fio>)
+    return result.b
+}
+
+fun passportData(): PassportData {
+    val result = PassportData.from("1111 111111")
+    check(result is Either.Right<PassportData>)
+    return result.b
+}
+
+// OrderItem VO
+fun passenger() = Passenger.from(fio(), passportData())
+
+private val ticketIdGenerator = object : TicketIdGenerator {
+    override fun generate() = ticketId()
+}
+
+fun ticket(): Ticket {
+    val ticket = Ticket.publishTicket(
+            ticketIdGenerator, FlightIsAnnounced, FlightIsNotToSoonForPublishing, flight(), ticketPrice())
+    check(ticket is Either.Right<Ticket>)
+    return ticket.b
+}
+
+// Order
+fun orderId() = OrderId(Random.nextLong())
+
+fun email() : Email {
+    val email = Email.from("someEmail@gmail.com")
+    check(email is Either.Right<Email>)
+    return email.b
+}
+
+fun orderItem() = OrderItem.from(passenger(), ticket())
 
 // version
 fun version() = Version.new()
