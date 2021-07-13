@@ -50,4 +50,24 @@ class MetricsGuard {
         println("D: " + metrics.getNormalizedDistanceFromMainSequence(
                 "com.polyakovworkbox.stringconcatcourse.flightManagement.domain"))
     }
+
+    @ArchTest
+    fun `uncle bob metrics for maintenance`(importedClasses: JavaClasses) {
+        val packages: Set<JavaPackage> = importedClasses.getPackage(
+                "com.polyakovworkbox.stringconcatcourse.maintenance").getSubpackages()
+        val components: MetricsComponents<JavaClass> = MetricsComponents.fromPackages(packages)
+
+        val metrics = ArchitectureMetrics.componentDependencyMetrics(components)
+
+        println("Ce: " + metrics.getEfferentCoupling(
+                "com.polyakovworkbox.stringconcatcourse.maintenance.domain"))
+        println("Ca: " + metrics.getAfferentCoupling(
+                "com.polyakovworkbox.stringconcatcourse.maintenance.domain"))
+        println("I: " + metrics.getInstability(
+                "com.polyakovworkbox.stringconcatcourse.maintenance.domain"))
+        println("A: " + metrics.getAbstractness(
+                "com.polyakovworkbox.stringconcatcourse.maintenance.domain"))
+        println("D: " + metrics.getNormalizedDistanceFromMainSequence(
+                "com.polyakovworkbox.stringconcatcourse.maintenance.domain"))
+    }
 }

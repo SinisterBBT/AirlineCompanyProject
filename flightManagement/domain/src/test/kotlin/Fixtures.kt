@@ -20,7 +20,6 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Fli
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightIdGenerator
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Email
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Fio
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Order
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderItem
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Passenger
@@ -211,7 +210,7 @@ fun ticket(): Ticket {
 // Order
 fun orderId() = OrderId(Random.nextLong())
 
-fun email() : Email {
+fun email(): Email {
     val email = Email.from("someEmail@gmail.com")
     check(email is Either.Right<Email>)
     return email.b

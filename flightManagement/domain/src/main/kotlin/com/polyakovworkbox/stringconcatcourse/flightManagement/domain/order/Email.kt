@@ -8,7 +8,7 @@ import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 
 class Email internal constructor(val email: String) : ValueObject {
 
-    companion object{
+    companion object {
         fun from(email: String): Either<EmailIsNotValidError, Email> {
             val regex = """[^\s]+@[^\s]+""".toRegex()
             return if (regex.matches(email)) {

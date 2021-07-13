@@ -8,19 +8,19 @@ import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 
 class Order internal constructor(
-        id: OrderId,
-        val email: Email,
-        val orderItems: List<OrderItem>,
-        version: Version
+    id: OrderId,
+    val email: Email,
+    val orderItems: List<OrderItem>,
+    version: Version
 ) : AggregateRoot<OrderId>(id, version) {
 
     companion object {
         fun createOrder(
-                idGenerator: OrderIdGenerator,
-                email: Email,
-                orderItems: List<OrderItem>
-        ) : Either<OrderIsEmptyError, Order> {
-            return if(orderItems.isNotEmpty()) {
+            idGenerator: OrderIdGenerator,
+            email: Email,
+            orderItems: List<OrderItem>
+        ): Either<OrderIsEmptyError, Order> {
+            return if (orderItems.isNotEmpty()) {
                 Order(
                     idGenerator.generate(),
                     email,
@@ -33,9 +33,6 @@ class Order internal constructor(
                 OrderIsEmptyError.left()
             }
         }
-
-//TODO: order state field and payOrder method
-
     }
 }
 
