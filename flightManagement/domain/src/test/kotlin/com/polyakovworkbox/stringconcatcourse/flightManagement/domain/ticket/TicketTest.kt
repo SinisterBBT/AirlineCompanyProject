@@ -1,16 +1,16 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket
 
-import FlightIsAnnounced
-import FlightIsNotAnnounced
-import FlightIsNotToSoonForPublishing
-import FlightIsToSoonForPublishing
-import flight
-import ticketId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsAnnounced
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsNotAnnounced
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsNotToSoonForPublishing
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsToSoonForPublishing
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketPrice
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketId
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import ticketPrice
 
 internal class TicketTest {
 

@@ -1,12 +1,12 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order
 
-import email
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.email
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.orderItem
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.orderId
 import io.kotest.assertions.arrow.either.shouldBeLeft
-import orderId
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.shouldBe
-import orderItem
 import org.junit.jupiter.api.Test
 
 internal class OrderTest {

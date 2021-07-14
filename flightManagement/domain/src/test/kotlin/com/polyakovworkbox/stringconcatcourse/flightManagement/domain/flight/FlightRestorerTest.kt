@@ -1,14 +1,14 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
 
-import aircraft
-import arrivalAirport
-import arrivalDate
-import departureAirport
-import departureDate
-import flightId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.arrivalAirport
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.arrivalDate
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.departureAirport
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.departureDate
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flightId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.version
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import version
 
 class FlightRestorerTest {
 

@@ -1,12 +1,12 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
 
-import aircraftId
-import aircraftModel
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftModel
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.registrationNumber
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.seatMap
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.version
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import registrationNumber
-import seatMap
-import version
 
 class AircraftRestorerTest {
 
@@ -26,9 +26,11 @@ class AircraftRestorerTest {
             version
         )
 
-        result.id shouldBe aircraftId
-        result.registrationNumber shouldBe registrationNumber
-        result.model shouldBe model
-        result.seatMap shouldBe seatMap
+        result.let {
+            it.id shouldBe aircraftId
+            it.registrationNumber shouldBe registrationNumber
+            it.model shouldBe model
+            it.seatMap shouldBe seatMap
+        }
     }
 }

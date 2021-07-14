@@ -1,7 +1,15 @@
-package com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft
+package com.polyakovworkbox.stringconcatcourse.leasing.domain
 
 import arrow.core.Either
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft.AircraftContractNumber
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft.AircraftId
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft.AircraftManufactureDate
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft.AircraftModel
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft.AircraftPayloadCapacity
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft.AircraftRegistrationNumber
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft.AircraftSeatMap
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft.Seat
 import java.time.LocalDate
 import kotlin.random.Random
 

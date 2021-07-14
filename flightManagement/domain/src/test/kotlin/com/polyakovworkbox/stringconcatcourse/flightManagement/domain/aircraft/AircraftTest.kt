@@ -1,11 +1,11 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
 
-import aircraftModel
-import aircraftId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftModel
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.registrationNumber
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.seatMap
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftId
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import registrationNumber
-import seatMap
 
 internal class AircraftTest {
 

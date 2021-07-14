@@ -1,3 +1,5 @@
+package com.polyakovworkbox.stringconcatcourse.flightManagement.domain
+
 import arrow.core.Either
 
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version

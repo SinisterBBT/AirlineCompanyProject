@@ -1,11 +1,11 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket
 
-import flight
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketPrice
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.version
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import ticketId
-import ticketPrice
-import version
 
 class TicketRestorerTest {
 
@@ -23,8 +23,10 @@ class TicketRestorerTest {
             version
         )
 
-        result.id shouldBe ticketId
-        result.flight shouldBe flight
-        result.price shouldBe price
+        result.let {
+            it.id shouldBe ticketId
+            it.flight shouldBe flight
+            it.price shouldBe price
+        }
     }
 }

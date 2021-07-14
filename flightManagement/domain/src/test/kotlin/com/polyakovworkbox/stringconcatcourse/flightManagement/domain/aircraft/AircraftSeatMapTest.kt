@@ -1,6 +1,6 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
 
-import correctSeatMapLayout
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.correctSeatMapLayout
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe

@@ -1,9 +1,9 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order
 
-import fio
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.fio
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.passportData
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import passportData
 
 internal class PassengerTest {
 
