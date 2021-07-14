@@ -32,7 +32,7 @@ fun actualArrivalAirport(): ActualArrivalAirport {
 }
 
 fun flightTime(): FlightTime {
-    val result = FlightTime.from(Duration.ofHours(5))
+    val result = FlightTime.from(Duration.ofHours(Random.nextLong(1, 24)))
     check(result is Either.Right<FlightTime>)
     return result.b
 }

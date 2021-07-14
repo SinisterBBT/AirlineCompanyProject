@@ -40,6 +40,11 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import kotlin.random.Random
 
+fun getRandomString(length: Int): String {
+    val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
+    return (1..length).map { allowedChars.random() }.joinToString("")
+}
+
 // Seat map value object
 fun correctSeatMapLayout(): ArrayList<Seat> {
     val result = ArrayList<Seat>()
@@ -110,7 +115,8 @@ fun departureDate(): DepartureDate {
 }
 
 fun arrivalDate(): ArrivalDate {
-    val result = ArrivalDate.from(ZonedDateTime.now(ZoneId.of("Europe/Moscow")).plusDays(45).plusHours(2))
+    val result = ArrivalDate.from(
+            ZonedDateTime.now(ZoneId.of("Europe/Moscow")).plusDays(45).plusHours(2))
     check(result is Either.Right<ArrivalDate>)
     return result.b
 }
@@ -187,13 +193,16 @@ object FlightIsNotToSoonForPublishing : FlightIsToSoonForPublishingChecker {
 
 // Passenger VO
 fun fio(): Fio {
-    val result = Fio.from("Ivanov Ivan Ivanovich")
+    val result = Fio.from(
+            "${getRandomString(Random.nextInt(3, 30))} " +
+                    "${getRandomString(Random.nextInt(3, 30))} " +
+                    "${getRandomString(Random.nextInt(3, 30))}")
     check(result is Either.Right<Fio>)
     return result.b
 }
 
 fun passportData(): PassportData {
-    val result = PassportData.from("1111 111111")
+    val result = PassportData.from("${Random.nextInt()} ${Random.nextInt()}")
     check(result is Either.Right<PassportData>)
     return result.b
 }
@@ -216,7 +225,7 @@ fun ticket(price: BigDecimal = BigDecimal(Random.nextInt(1, 500000))): Ticket {
 fun orderId() = OrderId(Random.nextLong())
 
 fun email(): Email {
-    val email = Email.from("someEmail@gmail.com")
+    val email = Email.from("${getRandomString(Random.nextInt(3, 1000))}@${getRandomString(Random.nextInt(3, 30))}")
     check(email is Either.Right<Email>)
     return email.b
 }
