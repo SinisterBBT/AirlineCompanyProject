@@ -1,8 +1,7 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket
 
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftRegistrationNumber
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.DepartureDate
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightId
 
 interface FlightIsAnnouncedChecker {
-    fun check(aircraftRegistrationNumber: AircraftRegistrationNumber, departureDate: DepartureDate): Boolean
+    fun check(flightId: FlightId): Boolean
 }

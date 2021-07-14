@@ -71,7 +71,7 @@ internal class FlightTest {
                 arrivalDate,
                 aircraft)
 
-        newFlight shouldBeLeft AircraftIsNotInOperationError
+        newFlight shouldBeLeft CannotAnnounceFlightError.AircraftIsNotInOperationError
     }
 
     @Test
@@ -93,7 +93,7 @@ internal class FlightTest {
                 arrivalDate,
                 aircraft)
 
-        newFlight shouldBeLeft AircraftIsAlreadyInFlightError
+        newFlight shouldBeLeft CannotAnnounceFlightError.AircraftIsAlreadyInFlightError
     }
 
     @Test
@@ -115,6 +115,6 @@ internal class FlightTest {
                 arrivalDate,
                 aircraft)
 
-        newFlight shouldBeLeft AirportDoesNotAllowFlightError
+        newFlight shouldBeLeft CannotAnnounceFlightError.AirportDoesNotAllowFlightError
     }
 }

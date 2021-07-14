@@ -9,6 +9,7 @@ object FlightRestorer {
         departureAirport: DepartureAirport,
         actualArrivalAirport: ActualArrivalAirport,
         flightTime: FlightTime,
+        state: FlightState,
         version: Version
     ): Flight {
         return Flight(
@@ -17,6 +18,8 @@ object FlightRestorer {
             actualArrivalAirport,
             flightTime,
             version
-        )
+        ).apply {
+            this.state = state
+        }
     }
 }

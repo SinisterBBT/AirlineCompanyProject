@@ -50,7 +50,7 @@ internal class TicketTest {
                 flight,
                 price)
 
-        result shouldBeLeft FlightIsNotAnnouncedError
+        result shouldBeLeft WrongTicketError.FlightIsNotAnnouncedError
     }
 
     @Test
@@ -65,6 +65,6 @@ internal class TicketTest {
                 flight,
                 price)
 
-        result shouldBeLeft FlightIsToSoonForPublishingError
+        result shouldBeLeft WrongTicketError.FlightIsToSoonForPublishingError
     }
 }

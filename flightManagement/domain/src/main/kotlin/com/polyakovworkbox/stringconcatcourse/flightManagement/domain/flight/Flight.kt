@@ -30,21 +30,21 @@ class Flight internal constructor(
             arrivalDate: ArrivalDate,
             aircraft: Aircraft
         ): Either<CannotAnnounceFlightError, Flight> {
-            return if (!aircraftIsNotInOperationChecker.check(aircraft.registrationNumber)) {
-                AircraftIsNotInOperationError.left()
-            } else if (aircraftIsAlreadyInFlightChecker.check(aircraft.registrationNumber)) {
-                AircraftIsAlreadyInFlightError.left()
-            } else if (!airportAllowsFlightChecker.check(departureDate)) {
-                AirportDoesNotAllowFlightError.left()
-            } else {
-                Flight(
-                        idGenerator.generate(),
-                        departureAirport,
-                        arrivalAirport,
-                        departureDate,
-                        arrivalDate,
-                        aircraft,
-                        Version.new()
+            return when {
+                !aircraftIsNotInOperationChecker.check(aircraft.registrationNumber) ->
+                    CannotAnnounceFlightError.AircraftIsNotInOperationError.left()
+                aircraftIsAlreadyInFlightChecker.check(aircraft.registrationNumber) ->
+                    CannotAnnounceFlightError.AircraftIsAlreadyInFlightError.left()
+                !airportAllowsFlightChecker.check(departureDate) ->
+                    CannotAnnounceFlightError.AirportDoesNotAllowFlightError.left()
+                else -> Flight(
+                    idGenerator.generate(),
+                    departureAirport,
+                    arrivalAirport,
+                    departureDate,
+                    arrivalDate,
+                    aircraft,
+                    Version.new()
                 ).apply {
                     addEvent(FlightAnnouncedDomainEvent(this.id))
                 }.right()
@@ -53,7 +53,8 @@ class Flight internal constructor(
     }
 }
 
-open class CannotAnnounceFlightError : BusinessError
-object AircraftIsNotInOperationError : CannotAnnounceFlightError()
-object AircraftIsAlreadyInFlightError : CannotAnnounceFlightError()
-object AirportDoesNotAllowFlightError : CannotAnnounceFlightError()
+sealed class CannotAnnounceFlightError : BusinessError {
+    object AircraftIsNotInOperationError : CannotAnnounceFlightError()
+    object AircraftIsAlreadyInFlightError : CannotAnnounceFlightError()
+    object AirportDoesNotAllowFlightError : CannotAnnounceFlightError()
+}

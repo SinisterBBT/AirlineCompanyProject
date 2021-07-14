@@ -23,20 +23,21 @@ class Ticket internal constructor(
             flight: Flight,
             price: Price
         ): Either<WrongTicketError, Ticket> {
-            val aircraftRegistrationNumber = flight.aircraft.registrationNumber
-            return if (!flightIsAnnouncedChecker.check(aircraftRegistrationNumber, flight.departureDate)) {
-                FlightIsNotAnnouncedError.left()
-            } else if (flightIsToSoonForPublishingChecker.check(aircraftRegistrationNumber, flight.departureDate)) {
-                FlightIsToSoonForPublishingError.left()
-            } else {
-                Ticket(idGenerator.generate(), flight, price, Version.new()).apply {
-                    addEvent(TicketPublishedDomainEvent(this.id))
-                }.right()
+            return when {
+                !flightIsAnnouncedChecker.check(flight.id) ->
+                    WrongTicketError.FlightIsNotAnnouncedError.left()
+                flightIsToSoonForPublishingChecker.check(flight.id) ->
+                    WrongTicketError.FlightIsToSoonForPublishingError.left()
+                else ->
+                    Ticket(idGenerator.generate(), flight, price, Version.new()).apply {
+                        addEvent(TicketPublishedDomainEvent(this.id))
+                    }.right()
             }
         }
     }
 }
 
-open class WrongTicketError : BusinessError
-object FlightIsNotAnnouncedError : WrongTicketError()
-object FlightIsToSoonForPublishingError : WrongTicketError()
+sealed class WrongTicketError : BusinessError {
+    object FlightIsNotAnnouncedError : WrongTicketError()
+    object FlightIsToSoonForPublishingError : WrongTicketError()
+}

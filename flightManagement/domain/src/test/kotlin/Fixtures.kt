@@ -170,19 +170,19 @@ fun price(value: BigDecimal = BigDecimal(Random.nextInt(1, 500000))): Price {
 }
 
 object FlightIsAnnounced : FlightIsAnnouncedChecker {
-    override fun check(aircraftRegistrationNumber: AircraftRegistrationNumber, departureDate: DepartureDate) = true
+    override fun check(flightId: FlightId) = true
 }
 
 object FlightIsNotAnnounced : FlightIsAnnouncedChecker {
-    override fun check(aircraftRegistrationNumber: AircraftRegistrationNumber, departureDate: DepartureDate) = false
+    override fun check(flightId: FlightId) = false
 }
 
 object FlightIsToSoonForPublishing : FlightIsToSoonForPublishingChecker {
-    override fun check(aircraftRegistrationNumber: AircraftRegistrationNumber, departureDate: DepartureDate) = true
+    override fun check(flightId: FlightId) = true
 }
 
 object FlightIsNotToSoonForPublishing : FlightIsToSoonForPublishingChecker {
-    override fun check(aircraftRegistrationNumber: AircraftRegistrationNumber, departureDate: DepartureDate) = false
+    override fun check(flightId: FlightId) = false
 }
 
 // Passenger VO
