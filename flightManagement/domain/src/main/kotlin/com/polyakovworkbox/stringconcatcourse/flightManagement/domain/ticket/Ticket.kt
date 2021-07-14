@@ -11,7 +11,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Fli
 class Ticket internal constructor(
     id: TicketId,
     val flight: Flight,
-    val price: TicketPrice,
+    val price: Price,
     version: Version
 ) : AggregateRoot<TicketId>(id, version) {
 
@@ -21,7 +21,7 @@ class Ticket internal constructor(
             flightIsAnnouncedChecker: FlightIsAnnouncedChecker,
             flightIsToSoonForPublishingChecker: FlightIsToSoonForPublishingChecker,
             flight: Flight,
-            price: TicketPrice
+            price: Price
         ): Either<WrongTicketError, Ticket> {
             val aircraftRegistrationNumber = flight.aircraft.registrationNumber
             return if (!flightIsAnnouncedChecker.check(aircraftRegistrationNumber, flight.departureDate)) {

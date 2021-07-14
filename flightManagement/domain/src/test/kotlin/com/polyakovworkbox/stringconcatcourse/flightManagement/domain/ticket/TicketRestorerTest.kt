@@ -2,7 +2,7 @@ package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket
 
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketId
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketPrice
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.price
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.version
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -13,7 +13,7 @@ class TicketRestorerTest {
     fun `restore ticket - success`() {
         val ticketId = ticketId()
         val flight = flight()
-        val price = ticketPrice()
+        val price = price()
         val version = version()
 
         val result = TicketRestorer.restoreTicket(

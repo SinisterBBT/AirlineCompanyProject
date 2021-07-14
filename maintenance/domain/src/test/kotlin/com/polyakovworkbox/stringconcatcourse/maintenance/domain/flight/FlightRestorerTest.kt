@@ -33,6 +33,5 @@ class FlightRestorerTest {
             it.actualArrivalAirport shouldBe actualArrivalAirport
             it.flightTime shouldBe flightTime
         }
-
     }
 }

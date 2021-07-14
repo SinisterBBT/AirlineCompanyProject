@@ -44,6 +44,5 @@ class AircraftRestorerTest {
             it.contractNumber shouldBe contractNumber
             it.manufactureDate shouldBe manufactureDate
         }
-
     }
 }

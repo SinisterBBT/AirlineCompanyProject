@@ -22,8 +22,11 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Fli
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightIdGenerator
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Email
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Fio
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Order
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderItem
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderRestorer
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderState
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Passenger
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.PassportData
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsAnnouncedChecker
@@ -31,7 +34,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Fli
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Ticket
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketIdGenerator
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketPrice
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Price
 import java.math.BigDecimal
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -160,9 +163,9 @@ fun flight(): Flight {
     return result.b
 }
 
-fun ticketPrice(): TicketPrice {
-    val result = TicketPrice.from(BigDecimal(100))
-    check(result is Either.Right<TicketPrice>)
+fun price(value: BigDecimal = BigDecimal(Random.nextInt(1, 500000))): Price {
+    val result = Price.from(value)
+    check(result is Either.Right<Price>)
     return result.b
 }
 
@@ -202,9 +205,9 @@ private val ticketIdGenerator = object : TicketIdGenerator {
     override fun generate() = ticketId()
 }
 
-fun ticket(): Ticket {
+fun ticket(price: BigDecimal = BigDecimal(Random.nextInt(1, 500000))): Ticket {
     val ticket = Ticket.publishTicket(
-            ticketIdGenerator, FlightIsAnnounced, FlightIsNotToSoonForPublishing, flight(), ticketPrice())
+            ticketIdGenerator, FlightIsAnnounced, FlightIsNotToSoonForPublishing, flight(), price(price))
     check(ticket is Either.Right<Ticket>)
     return ticket.b
 }
@@ -218,7 +221,20 @@ fun email(): Email {
     return email.b
 }
 
-fun orderItem() = OrderItem.from(passenger(), ticket())
+fun orderItem(ticket: Ticket = ticket()) = OrderItem.from(passenger(), ticket)
+
+fun order(
+    state: OrderState = OrderState.COMPLETED,
+    orderItems: List<OrderItem> = listOf(orderItem()),
+): Order {
+    return OrderRestorer.restoreOrder(
+            id = orderId(),
+            email = email(),
+            orderItems = orderItems,
+            state = state,
+            version = version()
+    )
+}
 
 // version
 fun version() = Version.new()

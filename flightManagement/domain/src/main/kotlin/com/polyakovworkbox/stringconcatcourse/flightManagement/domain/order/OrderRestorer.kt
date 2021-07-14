@@ -8,6 +8,7 @@ object OrderRestorer {
         id: OrderId,
         email: Email,
         orderItems: List<OrderItem>,
+        state: OrderState,
         version: Version
     ): Order {
         return Order(
@@ -15,6 +16,8 @@ object OrderRestorer {
             email,
             orderItems,
             version
-        )
+        ).apply {
+            this.state = state
+        }
     }
 }

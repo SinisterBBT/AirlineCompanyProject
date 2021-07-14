@@ -8,7 +8,7 @@ object TicketRestorer {
     fun restoreTicket(
         id: TicketId,
         flight: Flight,
-        price: TicketPrice,
+        price: Price,
         version: Version
     ): Ticket {
         return Ticket(

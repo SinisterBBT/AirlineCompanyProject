@@ -5,7 +5,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsNo
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsNotToSoonForPublishing
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsToSoonForPublishing
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketPrice
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.price
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketId
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
@@ -23,7 +23,7 @@ internal class TicketTest {
     @Test
     fun `publish new ticket - success`() {
         val flight = flight()
-        val price = ticketPrice()
+        val price = price()
 
         val result = Ticket.publishTicket(
                 idGenerator,
@@ -41,7 +41,7 @@ internal class TicketTest {
     @Test
     fun `publish new ticket - flight is not announced`() {
         val flight = flight()
-        val price = ticketPrice()
+        val price = price()
 
         val result = Ticket.publishTicket(
                 idGenerator,
@@ -56,7 +56,7 @@ internal class TicketTest {
     @Test
     fun `publish new ticket - flight is too soon`() {
         val flight = flight()
-        val price = ticketPrice()
+        val price = price()
 
         val result = Ticket.publishTicket(
                 idGenerator,

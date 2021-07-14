@@ -2,6 +2,7 @@ package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.com.polya
 
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.email
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderRestorer
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderState
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.orderId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.orderItem
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.version
@@ -16,12 +17,14 @@ class OrderRestorerTest {
         val orderId = orderId()
         val email = email()
         val orderItems = listOf(orderItem(), orderItem(), orderItem())
+        val state = OrderState.COMPLETED
         val version = version()
 
         val result = OrderRestorer.restoreOrder(
             orderId,
             email,
             orderItems,
+            state,
             version
         )
 
