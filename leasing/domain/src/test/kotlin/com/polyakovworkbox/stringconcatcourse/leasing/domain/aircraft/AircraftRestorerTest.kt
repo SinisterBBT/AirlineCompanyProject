@@ -1,5 +1,13 @@
 package com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft
 
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftId
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftModel
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.contractNumber
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.manufactureDate
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.payloadCapacity
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.registrationNumber
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.seatMap
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.version
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -27,12 +35,14 @@ class AircraftRestorerTest {
             version
         )
 
-        result.id shouldBe aircraftId
-        result.model shouldBe model
-        result.payloadCapacity shouldBe payloadCapacity
-        result.registrationNumber shouldBe registrationNumber
-        result.seatMap shouldBe seatMap
-        result.contractNumber shouldBe contractNumber
-        result.manufactureDate shouldBe manufactureDate
+        result.let {
+            it.id shouldBe aircraftId
+            it.model shouldBe model
+            it.payloadCapacity shouldBe payloadCapacity
+            it.registrationNumber shouldBe registrationNumber
+            it.seatMap shouldBe seatMap
+            it.contractNumber shouldBe contractNumber
+            it.manufactureDate shouldBe manufactureDate
+        }
     }
 }
