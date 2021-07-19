@@ -1,5 +1,12 @@
 package com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft
 
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftModel
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftId
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.contractNumber
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.manufactureDate
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.payloadCapacity
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.registrationNumber
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.seatMap
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe

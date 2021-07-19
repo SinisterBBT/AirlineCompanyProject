@@ -1,5 +1,6 @@
 package com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft
 
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.correctSeatMapLayout
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe

@@ -1,0 +1,36 @@
+package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
+
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftModel
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.registrationNumber
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.seatMap
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.version
+import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Test
+
+class AircraftRestorerTest {
+
+    @Test
+    fun `restore aircraft - success`() {
+        val aircraftId = aircraftId()
+        val registrationNumber = registrationNumber()
+        val model = aircraftModel()
+        val seatMap = seatMap()
+        val version = version()
+
+        val result = AircraftRestorer.restoreAircraft(
+            aircraftId,
+            registrationNumber,
+            model,
+            seatMap,
+            version
+        )
+
+        result.let {
+            it.id shouldBe aircraftId
+            it.registrationNumber shouldBe registrationNumber
+            it.model shouldBe model
+            it.seatMap shouldBe seatMap
+        }
+    }
+}

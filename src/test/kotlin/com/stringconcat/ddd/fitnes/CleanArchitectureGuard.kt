@@ -16,8 +16,23 @@ class CleanArchitectureGuard {
             .domainModels("com.polyakovworkbox.stringconcatcourse.leasing.domain..")
             .domainServices("com.polyakovworkbox.stringconcatcourse.leasing.domain..")
 
+    @ArchIgnore
     @ArchTest
-    val `leasing business logic should depends only on approved packages` =
+    val `onion architecture should be followed for flightManagement` =
+            Architectures.onionArchitecture()
+                    .domainModels("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
+                    .domainServices("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
+
+    @ArchIgnore
+    @ArchTest
+    val `onion architecture should be followed for maintenance` =
+            Architectures.onionArchitecture()
+                    .domainModels("com.polyakovworkbox.stringconcatcourse.maintenance.domain..")
+                    .domainServices("com.polyakovworkbox.stringconcatcourse.maintenance.domain..")
+
+    @ArchIgnore
+    @ArchTest
+    val `leasing business logic should depend only on approved packages` =
         ArchRuleDefinition.classes().that()
             .resideInAnyPackage("com.polyakovworkbox.stringconcatcourse.leasing.domain..")
         .should().onlyDependOnClassesThat()
@@ -30,4 +45,34 @@ class CleanArchitectureGuard {
             "org.jetbrains.annotations..",
             "arrow.core.."
         )
+
+    @ArchTest
+    val `flightManagement business logic should depend only on approved packages` =
+            ArchRuleDefinition.classes().that()
+                    .resideInAnyPackage("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
+                    .should().onlyDependOnClassesThat()
+                    .resideInAnyPackage(
+                            "com.polyakovworkbox.stringconcatcourse.flightManagement.domain..",
+                            "com.polyakovworkbox.stringconcatcourse.common..",
+                            "kotlin..",
+                            "kotlin.collections..",
+                            "java..",
+                            "org.jetbrains.annotations..",
+                            "arrow.core.."
+                    )
+
+    @ArchTest
+    val `maintenance business logic should depend only on approved packages` =
+            ArchRuleDefinition.classes().that()
+                    .resideInAnyPackage("com.polyakovworkbox.stringconcatcourse.maintenance.domain..")
+                    .should().onlyDependOnClassesThat()
+                    .resideInAnyPackage(
+                            "com.polyakovworkbox.stringconcatcourse.maintenance.domain..",
+                            "com.polyakovworkbox.stringconcatcourse.common..",
+                            "kotlin..",
+                            "kotlin.collections..",
+                            "java..",
+                            "org.jetbrains.annotations..",
+                            "arrow.core.."
+                    )
 }
