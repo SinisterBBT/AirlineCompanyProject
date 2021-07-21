@@ -1,5 +1,5 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
 
-interface AirportAllowsFlightChecker {
+interface AirportAllowsFlight {
     fun check(departureDate: DepartureDate): Boolean
 }

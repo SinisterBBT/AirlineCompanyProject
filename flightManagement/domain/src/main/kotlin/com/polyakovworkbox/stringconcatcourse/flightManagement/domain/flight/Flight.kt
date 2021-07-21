@@ -21,9 +21,9 @@ class Flight internal constructor(
     companion object {
         fun announceNewFlight(
             idGenerator: FlightIdGenerator,
-            aircraftIsNotInOperationChecker: AircraftIsNotInOperationChecker,
-            aircraftIsAlreadyInFlightChecker: AircraftIsAlreadyInFlightChecker,
-            airportAllowsFlightChecker: AirportAllowsFlightChecker,
+            aircraftIsNotInOperation: AircraftIsNotInOperation,
+            aircraftIsAlreadyInFlight: AircraftIsAlreadyInFlight,
+            airportAllowsFlight: AirportAllowsFlight,
             departureAirport: DepartureAirport,
             arrivalAirport: ArrivalAirport,
             departureDate: DepartureDate,
@@ -31,11 +31,11 @@ class Flight internal constructor(
             aircraft: Aircraft
         ): Either<CannotAnnounceFlightError, Flight> {
             return when {
-                !aircraftIsNotInOperationChecker.check(aircraft.registrationNumber) ->
+                !aircraftIsNotInOperation.check(aircraft.registrationNumber) ->
                     CannotAnnounceFlightError.AircraftIsNotInOperationError.left()
-                aircraftIsAlreadyInFlightChecker.check(aircraft.registrationNumber) ->
+                aircraftIsAlreadyInFlight.check(aircraft.registrationNumber) ->
                     CannotAnnounceFlightError.AircraftIsAlreadyInFlightError.left()
-                !airportAllowsFlightChecker.check(departureDate) ->
+                !airportAllowsFlight.check(departureDate) ->
                     CannotAnnounceFlightError.AirportDoesNotAllowFlightError.left()
                 else -> Flight(
                     idGenerator.generate(),

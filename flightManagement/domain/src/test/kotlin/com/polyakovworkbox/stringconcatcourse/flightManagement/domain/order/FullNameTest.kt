@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class FioTest {
+internal class FullNameTest {
 
     @Test
-    fun `create fio - success`() {
+    fun `create full name - success`() {
         val fio = "Ivanov Ivan Ivanovich"
 
-        val result = Fio.from(fio)
+        val result = FullName.from(fio)
 
         result shouldBeRight {
             it.fio shouldBe fio
@@ -22,8 +22,8 @@ internal class FioTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["", " "])
-    fun `create fio - empty`(fio: String) {
-        val result = Fio.from(fio)
+    fun `create full name - empty`(fio: String) {
+        val result = FullName.from(fio)
 
         result shouldBeLeft EmptyFioError
     }

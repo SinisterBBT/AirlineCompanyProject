@@ -4,4 +4,4 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 @Suppress("TooManyFunctions")
-class LeasingConfiguration
+class MaintenanceContextConfiguration

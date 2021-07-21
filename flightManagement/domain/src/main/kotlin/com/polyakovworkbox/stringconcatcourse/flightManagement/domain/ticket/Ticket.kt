@@ -18,15 +18,15 @@ class Ticket internal constructor(
     companion object {
         fun publishTicket(
             idGenerator: TicketIdGenerator,
-            flightIsAnnouncedChecker: FlightIsAnnouncedChecker,
-            flightIsToSoonForPublishingChecker: FlightIsToSoonForPublishingChecker,
+            flightIsAnnounced: FlightIsAnnounced,
+            flightIsToSoonForPublishing: FlightIsToSoonForPublishing,
             flight: Flight,
             price: Price
         ): Either<WrongTicketError, Ticket> {
             return when {
-                !flightIsAnnouncedChecker.check(flight.id) ->
+                !flightIsAnnounced.check(flight.id) ->
                     WrongTicketError.FlightIsNotAnnouncedError.left()
-                flightIsToSoonForPublishingChecker.check(flight.id) ->
+                flightIsToSoonForPublishing.check(flight.id) ->
                     WrongTicketError.FlightIsToSoonForPublishingError.left()
                 else ->
                     Ticket(idGenerator.generate(), flight, price, Version.new()).apply {

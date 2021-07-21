@@ -20,17 +20,17 @@ class AircraftTest {
         override fun generate() = aircraftId
     }
 
-    private object AircraftExist : AircraftAlreadyExistsChecker {
+    private object AircraftExist : AircraftAlreadyExists {
         override fun check(registrationNumber: AircraftRegistrationNumber) = true
     }
 
-    private object AircraftDoesNotExist : AircraftAlreadyExistsChecker {
+    private object AircraftDoesNotExist : AircraftAlreadyExists {
         override fun check(registrationNumber: AircraftRegistrationNumber) = false
     }
 
     @Test
     fun `add aircraft to the fleet - success`() {
-        val aircraftAlreadyExistsChecker = AircraftDoesNotExist
+        val aircraftAlreadyExists = AircraftDoesNotExist
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
         val registrationNumber = registrationNumber()
@@ -40,7 +40,7 @@ class AircraftTest {
 
         val result = Aircraft.acquireNewAircraft(
             idGenerator,
-            aircraftAlreadyExistsChecker,
+            aircraftAlreadyExists,
             model,
             payloadCapacity,
             registrationNumber,
@@ -62,7 +62,7 @@ class AircraftTest {
 
     @Test
     fun `add aircraft to the fleet - with the exiting registration number`() {
-        val aircraftAlreadyExistsChecker = AircraftExist
+        val aircraftAlreadyExists = AircraftExist
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
         val registrationNumber = registrationNumber()
@@ -72,7 +72,7 @@ class AircraftTest {
 
         val result = Aircraft.acquireNewAircraft(
             idGenerator,
-            aircraftAlreadyExistsChecker,
+            aircraftAlreadyExists,
             model,
             payloadCapacity,
             registrationNumber,

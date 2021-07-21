@@ -10,9 +10,9 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.A
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftRegistrationNumber
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftSeatMap
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.Seat
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsAlreadyInFlightChecker
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsNotInOperationChecker
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AirportAllowsFlightChecker
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsAlreadyInFlight
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsNotInOperation
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AirportAllowsFlight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.ArrivalAirport
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.DepartureAirport
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.DepartureDate
@@ -21,7 +21,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Arr
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Flight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightIdGenerator
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Email
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Fio
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.FullName
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Order
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderItem
@@ -29,8 +29,8 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Orde
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderState
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Passenger
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.PassportData
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsAnnouncedChecker
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsToSoonForPublishingChecker
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsAnnounced
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsToSoonForPublishing
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Ticket
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketIdGenerator
@@ -121,27 +121,27 @@ fun arrivalDate(): ArrivalDate {
     return result.b
 }
 
-object AircraftIsInOperation : AircraftIsNotInOperationChecker {
+object AircraftIsInOperation : AircraftIsNotInOperation {
     override fun check(registrationNumber: AircraftRegistrationNumber) = true
 }
 
-object AircraftDoesNotExist : AircraftIsNotInOperationChecker {
+object AircraftDoesNotExist : AircraftIsNotInOperation {
     override fun check(registrationNumber: AircraftRegistrationNumber) = false
 }
 
-object AircraftIsNotInFlight : AircraftIsAlreadyInFlightChecker {
+object AircraftIsNotInFlight : AircraftIsAlreadyInFlight {
     override fun check(registrationNumber: AircraftRegistrationNumber) = false
 }
 
-object AircraftIsAlreadyInFlight : AircraftIsAlreadyInFlightChecker {
+object AircraftIsAlreadyInFlight : AircraftIsAlreadyInFlight {
     override fun check(registrationNumber: AircraftRegistrationNumber) = true
 }
 
-object AirportAllowsFlight : AirportAllowsFlightChecker {
+object AirportAllowsFlight : AirportAllowsFlight {
     override fun check(departureDate: DepartureDate) = true
 }
 
-object AirportDoesNotAllowFlight : AirportAllowsFlightChecker {
+object AirportDoesNotAllowFlight : AirportAllowsFlight {
     override fun check(departureDate: DepartureDate) = false
 }
 
@@ -175,29 +175,29 @@ fun price(value: BigDecimal = BigDecimal(Random.nextInt(1, 500000))): Price {
     return result.b
 }
 
-object FlightIsAnnounced : FlightIsAnnouncedChecker {
+object FlightIsAnnounced : FlightIsAnnounced {
     override fun check(flightId: FlightId) = true
 }
 
-object FlightIsNotAnnounced : FlightIsAnnouncedChecker {
+object FlightIsNotAnnounced : FlightIsAnnounced {
     override fun check(flightId: FlightId) = false
 }
 
-object FlightIsToSoonForPublishing : FlightIsToSoonForPublishingChecker {
+object FlightIsToSoonForPublishing : FlightIsToSoonForPublishing {
     override fun check(flightId: FlightId) = true
 }
 
-object FlightIsNotToSoonForPublishing : FlightIsToSoonForPublishingChecker {
+object FlightIsNotToSoonForPublishing : FlightIsToSoonForPublishing {
     override fun check(flightId: FlightId) = false
 }
 
 // Passenger VO
-fun fio(): Fio {
-    val result = Fio.from(
+fun fio(): FullName {
+    val result = FullName.from(
             "${getRandomString(Random.nextInt(3, 30))} " +
                 "${getRandomString(Random.nextInt(3, 30))} " +
                     getRandomString(Random.nextInt(3, 30)))
-    check(result is Either.Right<Fio>)
+    check(result is Either.Right<FullName>)
     return result.b
 }
 
