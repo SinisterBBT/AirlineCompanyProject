@@ -16,6 +16,8 @@ class Flight internal constructor(
     version: Version
 ) : AggregateRoot<FlightId>(id, version) {
 
+    var actualFlightTime: FlightTime? = null
+
     var state: FlightState = FlightState.REGISTERED
         internal set
 
@@ -40,7 +42,10 @@ class Flight internal constructor(
 
     fun isActive(): Boolean = state.active
 
-    fun complete() = changeState(FlightState.COMPLETED, FlightCompletedDomainEvent(id))
+    fun arrived(actualFlightTime: FlightTime) {
+        changeState(FlightState.ARRIVED, FlightCompletedDomainEvent(id))
+        this.actualFlightTime = actualFlightTime
+    }
 
     private fun changeState(newState: FlightState, event: DomainEvent): Either<InvalidState, Unit> {
         return when {
@@ -59,8 +64,8 @@ enum class FlightState(
     val active: Boolean,
     private val nextStates: Set<FlightState> = emptySet()
 ) {
-    COMPLETED(active = false),
-    REGISTERED(active = true, nextStates = setOf(COMPLETED));
+    ARRIVED(active = false),
+    REGISTERED(active = true, nextStates = setOf(ARRIVED));
 
     fun canChangeTo(state: FlightState) = nextStates.contains(state)
 }

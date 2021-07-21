@@ -5,7 +5,6 @@ import com.polyakovworkbox.stringconcatcourse.maintenance.domain.departureAirpor
 import com.polyakovworkbox.stringconcatcourse.maintenance.domain.flight
 import com.polyakovworkbox.stringconcatcourse.maintenance.domain.flightTime
 import com.polyakovworkbox.stringconcatcourse.maintenance.domain.flightId
-import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.shouldBe
@@ -45,7 +44,7 @@ internal class FlightTest {
     }
 
     @ParameterizedTest
-    @EnumSource(names = ["COMPLETED"])
+    @EnumSource(names = ["ARRIVED"])
     fun `active - false`(state: FlightState) {
         val order = flight(state = state)
 
@@ -54,22 +53,28 @@ internal class FlightTest {
 
     @Test
     fun `complete flight - success`() {
-        val order = flight(state = FlightState.REGISTERED)
+        val flight = flight(state = FlightState.REGISTERED)
+        val actualFlightTime = flightTime()
 
-        order.let {
-            it.complete() shouldBeRight Unit
-            it.state shouldBe FlightState.COMPLETED
-            it.popEvents() shouldContainExactlyInAnyOrder listOf(FlightCompletedDomainEvent(order.id))
+        flight.arrived(actualFlightTime)
+
+        flight.let {
+            it.state shouldBe FlightState.ARRIVED
+            it.actualFlightTime shouldBe actualFlightTime
+            it.popEvents() shouldContainExactlyInAnyOrder listOf(FlightCompletedDomainEvent(flight.id))
         }
     }
 
     @Test
     fun `complete order - already`() {
-        val order = flight(state = FlightState.COMPLETED)
+        val flight = flight(state = FlightState.ARRIVED)
+        val actualFlightTime = flightTime()
 
-        order.let {
-            it.complete() shouldBeRight Unit
-            it.state shouldBe FlightState.COMPLETED
+        flight.arrived(actualFlightTime)
+
+        flight.let {
+            it.state shouldBe FlightState.ARRIVED
+            it.actualFlightTime shouldBe actualFlightTime
             it.popEvents().shouldBeEmpty()
         }
     }
