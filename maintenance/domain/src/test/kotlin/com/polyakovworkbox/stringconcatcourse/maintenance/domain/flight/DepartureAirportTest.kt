@@ -1,5 +1,6 @@
 package com.polyakovworkbox.stringconcatcourse.maintenance.domain.flight
 
+import com.polyakovworkbox.stringconcatcourse.maintenance.domain.departureAirport
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe
@@ -8,6 +9,16 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class DepartureAirportTest {
+
+    @Test
+    fun `DepartureAirport is equal to other DepartureAirport with the same value`() {
+        val departureAirport = "LED"
+        val firstValue = departureAirport(departureAirport)
+        val secondValue = departureAirport(departureAirport)
+
+        (firstValue == secondValue) shouldBe true
+    }
+
     @Test
     fun `create airport - success`() {
         val airport = DepartureAirport.from("LED")

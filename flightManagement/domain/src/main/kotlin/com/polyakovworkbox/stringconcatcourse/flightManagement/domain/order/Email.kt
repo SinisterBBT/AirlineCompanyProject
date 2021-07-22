@@ -6,7 +6,7 @@ import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 
-class Email internal constructor(val email: String) : ValueObject {
+data class Email internal constructor(val email: String) : ValueObject {
 
     companion object {
         fun from(email: String): Either<EmailIsNotValidError, Email> {

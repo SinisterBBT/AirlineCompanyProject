@@ -2,7 +2,7 @@ package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
 
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftModel
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.registrationNumber
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftRegistrationNumber
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.seatMap
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.version
 import io.kotest.matchers.shouldBe
@@ -13,7 +13,7 @@ class AircraftRestorerTest {
     @Test
     fun `restore aircraft - success`() {
         val aircraftId = aircraftId()
-        val registrationNumber = registrationNumber()
+        val registrationNumber = aircraftRegistrationNumber()
         val model = aircraftModel()
         val seatMap = seatMap()
         val version = version()

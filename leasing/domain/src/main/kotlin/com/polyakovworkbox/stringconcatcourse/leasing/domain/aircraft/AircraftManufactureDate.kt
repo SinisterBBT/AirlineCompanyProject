@@ -7,7 +7,7 @@ import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 import java.time.LocalDate
 
-class AircraftManufactureDate internal constructor(val manufactureDate: LocalDate) : ValueObject {
+data class AircraftManufactureDate internal constructor(val manufactureDate: LocalDate) : ValueObject {
 
     companion object {
         fun from(manufactureDate: LocalDate): Either<ManufactureDateInFutureError, AircraftManufactureDate> =

@@ -1,7 +1,7 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
 
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftModel
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.registrationNumber
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftRegistrationNumber
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.seatMap
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftId
 import io.kotest.matchers.shouldBe
@@ -17,7 +17,7 @@ internal class AircraftTest {
 
     @Test
     fun `acquire info about new aircraft - success`() {
-        val registrationNumber = registrationNumber()
+        val registrationNumber = aircraftRegistrationNumber()
         val model = aircraftModel()
         val seatMap = seatMap()
 

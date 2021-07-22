@@ -18,7 +18,7 @@ open class DomainEntity<T> protected constructor(
     }
 }
 
-class Version internal constructor(val value: Long) : ValueObject {
+data class Version internal constructor(val value: Long) : ValueObject {
 
     fun increment() = Version(value + 1)
 

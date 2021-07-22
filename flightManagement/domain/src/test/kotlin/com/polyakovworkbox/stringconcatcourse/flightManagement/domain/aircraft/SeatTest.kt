@@ -1,6 +1,7 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
 
 import arrow.core.Either
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.seat
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe
@@ -9,6 +10,14 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class SeatTest {
+
+    @Test
+    fun `Seat is equal to other Seat with the same value`() {
+        val firstValue = seat()
+        val secondValue = seat()
+
+        (firstValue == secondValue) shouldBe true
+    }
 
     @Test
     fun `create aircraft model - success`() {

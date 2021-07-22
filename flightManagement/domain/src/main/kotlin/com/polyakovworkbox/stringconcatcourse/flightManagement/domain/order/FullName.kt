@@ -6,7 +6,7 @@ import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 
-class FullName internal constructor(val fio: String) : ValueObject {
+data class FullName internal constructor(val fio: String) : ValueObject {
     companion object {
         fun from(fio: String): Either<EmptyFioError, FullName> {
             return if (fio.isNotBlank()) {

@@ -7,7 +7,7 @@ import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 import java.time.ZonedDateTime
 
-class DepartureDate internal constructor(val departureDate: ZonedDateTime) : ValueObject {
+data class DepartureDate internal constructor(val departureDate: ZonedDateTime) : ValueObject {
 
     companion object {
         fun from(departureDate: ZonedDateTime): Either<DepartureDateToSoonError, DepartureDate> {

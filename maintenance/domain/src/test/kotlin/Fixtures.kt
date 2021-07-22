@@ -19,20 +19,20 @@ private val idGenerator = object : FlightIdGenerator {
     override fun generate() = flightId()
 }
 
-fun departureAirport(): DepartureAirport {
-    val result = DepartureAirport.from("LED")
+fun departureAirport(departureAirport: String = "LED"): DepartureAirport {
+    val result = DepartureAirport.from(departureAirport)
     check(result is Either.Right<DepartureAirport>)
     return result.b
 }
 
-fun actualArrivalAirport(): ActualArrivalAirport {
-    val result = ActualArrivalAirport.from("MSK")
+fun actualArrivalAirport(arrivalAirport: String = "MSK"): ActualArrivalAirport {
+    val result = ActualArrivalAirport.from(arrivalAirport)
     check(result is Either.Right<ActualArrivalAirport>)
     return result.b
 }
 
-fun flightTime(): FlightTime {
-    val result = FlightTime.from(Duration.ofHours(Random.nextLong(1, 24)))
+fun flightTime(flightTime: Duration = Duration.ofHours(Random.nextLong(1, 24))): FlightTime {
+    val result = FlightTime.from(flightTime)
     check(result is Either.Right<FlightTime>)
     return result.b
 }

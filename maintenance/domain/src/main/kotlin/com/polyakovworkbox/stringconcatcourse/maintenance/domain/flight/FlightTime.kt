@@ -7,7 +7,7 @@ import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 import java.time.Duration
 
-class FlightTime internal constructor(val flightTime: Duration) : ValueObject {
+data class FlightTime internal constructor(val flightTime: Duration) : ValueObject {
 
     companion object {
         fun from(flightTime: Duration): Either<FlightTimeNegativeError, FlightTime> {

@@ -1,11 +1,21 @@
 package com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft
 
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.payloadCapacity
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class AircraftPayloadCapacityTest {
+
+    @Test
+    fun `AircraftPayloadCapacity is equal to other AircraftPayloadCapacity with the same value`() {
+        val payloadCapacity = 100500
+        val firstValue = payloadCapacity(payloadCapacity)
+        val secondValue = payloadCapacity(payloadCapacity)
+
+        (firstValue == secondValue) shouldBe true
+    }
 
     @Test
     fun `create payload capacity - success`() {

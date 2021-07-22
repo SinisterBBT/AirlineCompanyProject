@@ -2,10 +2,10 @@ package com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft
 
 import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftId
 import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftModel
-import com.polyakovworkbox.stringconcatcourse.leasing.domain.contractNumber
-import com.polyakovworkbox.stringconcatcourse.leasing.domain.manufactureDate
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftContractNumber
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftManufactureDate
 import com.polyakovworkbox.stringconcatcourse.leasing.domain.payloadCapacity
-import com.polyakovworkbox.stringconcatcourse.leasing.domain.registrationNumber
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftRegistrationNumber
 import com.polyakovworkbox.stringconcatcourse.leasing.domain.seatMap
 import com.polyakovworkbox.stringconcatcourse.leasing.domain.version
 import io.kotest.matchers.shouldBe
@@ -18,10 +18,10 @@ class AircraftRestorerTest {
         val aircraftId = aircraftId()
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
-        val registrationNumber = registrationNumber()
+        val registrationNumber = aircraftRegistrationNumber()
         val seatMap = seatMap()
-        val contractNumber = contractNumber()
-        val manufactureDate = manufactureDate()
+        val contractNumber = aircraftContractNumber()
+        val manufactureDate = aircraftManufactureDate()
         val version = version()
 
         val result = AircraftRestorer.restoreAircraft(
