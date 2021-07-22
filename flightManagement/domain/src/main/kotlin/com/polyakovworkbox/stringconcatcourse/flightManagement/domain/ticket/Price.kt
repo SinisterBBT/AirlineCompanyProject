@@ -3,12 +3,13 @@ package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
+import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 import java.math.BigDecimal
 
-class Price(
+data class Price(
     val price: BigDecimal
-) {
+) : ValueObject {
     companion object {
 
         private const val SCALE = 2

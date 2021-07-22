@@ -11,6 +11,14 @@ import java.math.BigDecimal
 
 internal class PriceTest {
 
+    @Test
+    fun `Price is equal to other Price with the same value`() {
+        val firstValue = price(BigDecimal.ONE)
+        val secondValue = price(BigDecimal.ONE)
+
+        (firstValue == secondValue) shouldBe true
+    }
+
     @ParameterizedTest
     @ValueSource(ints = [0, 1])
     fun `create price - success`(value: Int) {
