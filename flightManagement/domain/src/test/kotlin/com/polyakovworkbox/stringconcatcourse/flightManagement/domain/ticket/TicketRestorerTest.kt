@@ -1,6 +1,6 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket
 
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flightId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.price
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.version
@@ -12,20 +12,20 @@ class TicketRestorerTest {
     @Test
     fun `restore ticket - success`() {
         val ticketId = ticketId()
-        val flight = flight()
+        val flightId = flightId()
         val price = price()
         val version = version()
 
         val result = TicketRestorer.restoreTicket(
             ticketId,
-            flight,
+            flightId,
             price,
             version
         )
 
         result.let {
             it.id shouldBe ticketId
-            it.flight shouldBe flight
+            it.flightId shouldBe flightId
             it.price shouldBe price
         }
     }
