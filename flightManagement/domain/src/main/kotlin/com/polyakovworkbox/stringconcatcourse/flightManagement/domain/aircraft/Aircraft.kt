@@ -7,7 +7,7 @@ class Aircraft internal constructor(
     id: AircraftId,
     val registrationNumber: AircraftRegistrationNumber,
     val model: AircraftModel,
-    val seatMap: AircraftSeatMap,
+    val seatCount: AircraftSeatCount,
     version: Version
 ) : AggregateRoot<AircraftId>(id, version) {
 
@@ -16,13 +16,13 @@ class Aircraft internal constructor(
             idGenerator: AircraftIdGenerator,
             registrationNumber: AircraftRegistrationNumber,
             model: AircraftModel,
-            seatMap: AircraftSeatMap,
+            seatCount: AircraftSeatCount,
         ): Aircraft {
             return Aircraft(
                     idGenerator.generate(),
                     registrationNumber,
                     model,
-                    seatMap,
+                    seatCount,
                     Version.new()
                 ).apply {
                     addEvent(AircraftInfoAcquiredEvent(this.id))

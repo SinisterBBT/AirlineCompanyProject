@@ -8,8 +8,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.A
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftIdGenerator
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftModel
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftRegistrationNumber
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftSeatMap
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.Seat
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftSeatCount
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsAlreadyInFlight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsNotInOperation
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AirportAllowsFlight
@@ -45,26 +44,6 @@ private fun getRandomString(length: Int): String {
     return (1..length).map { allowedChars.random() }.joinToString("")
 }
 
-// Seat map value object
-fun aircraftSeatMap(): List<Seat> {
-     return listOf("A1", "A2", "A3", "A4", "A5", "A6",
-             "B1", "B2", "B3", "B4", "B5", "B6",
-             "C1", "C2", "C3", "C4", "C5", "C6",
-             "D1", "D2", "D3", "D4", "D5", "D6",
-             "F1", "F2", "F3", "F4", "F5", "F6",
-             "G1", "G2", "G3", "G4", "G5", "G6").map { seatName ->
-                 val seat = Seat.from(seatName)
-                 check(seat is Either.Right<Seat>)
-                 seat.b
-     }
-}
-
-fun seat(seatNumber: String = "A1"): Seat {
-    val result = Seat.from(seatNumber)
-    check(result is Either.Right<Seat>)
-    return result.b
-}
-
 // Aircraft aggregate
 fun aircraftId() = AircraftId(Random.nextLong())
 
@@ -80,9 +59,9 @@ fun aircraftModel(model: String = "Model ${Random.nextInt()}"): AircraftModel {
     return result.b
 }
 
-fun seatMap(): AircraftSeatMap {
-    val result = AircraftSeatMap.from(aircraftSeatMap())
-    check(result is Either.Right<AircraftSeatMap>)
+fun seatCount(seatCount: Int = Random.nextInt(1, 2000)): AircraftSeatCount {
+    val result = AircraftSeatCount.from(seatCount)
+    check(result is Either.Right<AircraftSeatCount>)
     return result.b
 }
 
@@ -94,7 +73,7 @@ val aircraftIdGenerator = object : AircraftIdGenerator {
 fun flightId() = FlightId(Random.nextLong())
 
 fun aircraft(): Aircraft {
-    return Aircraft.acquireNewAircraft(aircraftIdGenerator, aircraftRegistrationNumber(), aircraftModel(), seatMap())
+    return Aircraft.acquireNewAircraft(aircraftIdGenerator, aircraftRegistrationNumber(), aircraftModel(), seatCount())
 }
 
 fun departureAirport(departureAirport: String = "LED"): DepartureAirport {

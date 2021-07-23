@@ -1,36 +1,36 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
 
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftSeatMap
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-class AircraftSeatMapTest {
+class AircraftSeatCountTest {
 
     @Test
     fun `AircraftSeatMap is equal to other AircraftSeatMap with the same value`() {
-        val firstValue = AircraftSeatMap.from(aircraftSeatMap())
-        val secondValue = AircraftSeatMap.from(aircraftSeatMap())
+        val seatCount = 50
+        val firstValue = AircraftSeatCount.from(seatCount)
+        val secondValue = AircraftSeatCount.from(seatCount)
 
         (firstValue == secondValue) shouldBe true
     }
 
     @Test
     fun `create seat map - success`() {
-        val seatMap = aircraftSeatMap()
+        val seatCount = 50
 
-        val result = AircraftSeatMap.from(seatMap)
+        val result = AircraftSeatCount.from(seatCount)
 
         result shouldBeRight {
-            it.seatMap shouldBe seatMap
+            it.seatCount shouldBe seatCount
         }
     }
 
     @Test
     fun `create seat map - empty seat map`() {
-        val result = AircraftSeatMap.from(arrayListOf())
+        val result = AircraftSeatCount.from(0)
 
-        result shouldBeLeft WrongSeatMapLayout
+        result shouldBeLeft WrongSeatMapCount
     }
 }

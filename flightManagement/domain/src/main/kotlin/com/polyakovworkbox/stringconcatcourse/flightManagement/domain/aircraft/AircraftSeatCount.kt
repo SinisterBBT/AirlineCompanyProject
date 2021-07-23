@@ -6,16 +6,16 @@ import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 
-data class AircraftSeatMap internal constructor(val seatMap: List<Seat>) : ValueObject {
+data class AircraftSeatCount internal constructor(val seatCount: Int) : ValueObject {
 
     companion object {
-        fun from(seatMap: List<Seat>): Either<WrongSeatMapLayout, AircraftSeatMap> =
-            if (seatMap.isNotEmpty()) {
-                AircraftSeatMap(seatMap).right()
+        fun from(seatCount: Int): Either<WrongSeatMapCount, AircraftSeatCount> =
+            if (seatCount > 0) {
+                AircraftSeatCount(seatCount).right()
             } else {
-                WrongSeatMapLayout.left()
+                WrongSeatMapCount.left()
             }
     }
 }
 
-object WrongSeatMapLayout : BusinessError
+object WrongSeatMapCount : BusinessError

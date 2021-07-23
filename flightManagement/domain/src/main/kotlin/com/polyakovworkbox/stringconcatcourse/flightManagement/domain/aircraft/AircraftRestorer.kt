@@ -8,14 +8,14 @@ object AircraftRestorer {
         id: AircraftId,
         aircraftRegistrationNumber: AircraftRegistrationNumber,
         model: AircraftModel,
-        seatMap: AircraftSeatMap,
+        seatCount: AircraftSeatCount,
         version: Version
     ): Aircraft {
         return Aircraft(
             id,
             aircraftRegistrationNumber,
             model,
-            seatMap,
+            seatCount,
             version
         )
     }
