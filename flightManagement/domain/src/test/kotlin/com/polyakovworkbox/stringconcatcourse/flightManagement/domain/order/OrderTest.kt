@@ -5,7 +5,8 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.orderItem
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.orderId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.passenger
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.price
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketId
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.collections.shouldBeEmpty
@@ -70,8 +71,8 @@ internal class OrderTest {
 
     @Test
     fun `calculate total`() {
-        val orderItem1 = orderItem(passenger(), ticket(price = BigDecimal("1.03")))
-        val orderItem2 = orderItem(passenger(), ticket(price = BigDecimal("91.33")))
+        val orderItem1 = orderItem(passenger(), ticketId(), price(BigDecimal("1.03")))
+        val orderItem2 = orderItem(passenger(), ticketId(), price(BigDecimal("91.33")))
 
         val order = order(orderItems = listOf(orderItem1, orderItem2))
 

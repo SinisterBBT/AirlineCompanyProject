@@ -3,7 +3,6 @@ package com.polyakovworkbox.stringconcatcourse.flightManagement.domain
 import arrow.core.Either
 
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.Aircraft
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftIdGenerator
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftModel
@@ -30,9 +29,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Pass
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.PassportData
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsAnnounced
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsToSoonForPublishing
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Ticket
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketId
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketIdGenerator
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Price
 import java.math.BigDecimal
 import java.time.ZoneId
@@ -71,10 +68,6 @@ val aircraftIdGenerator = object : AircraftIdGenerator {
 
 // Flight aggregate
 fun flightId() = FlightId(Random.nextLong())
-
-fun aircraft(): Aircraft {
-    return Aircraft.acquireNewAircraft(aircraftIdGenerator, aircraftRegistrationNumber(), aircraftModel(), seatCount())
-}
 
 fun departureAirport(departureAirport: String = "LED"): DepartureAirport {
     val result = DepartureAirport.from(departureAirport)
@@ -133,7 +126,7 @@ val flightIdGenerator = object : FlightIdGenerator {
 }
 
 // Ticket aggregate
-fun ticketId() = TicketId(Random.nextLong())
+fun ticketId(ticketId: Long = Random.nextLong()) = TicketId(ticketId)
 
 fun flight(): Flight {
     val result = Flight.announceNewFlight(
@@ -198,17 +191,6 @@ private fun defaultPassportData() = "${Random.nextInt(1111, 9999)} ${Random.next
 fun passenger(fullName: FullName = fullName(), passportData: PassportData = passportData()) =
         Passenger.from(fullName, passportData)
 
-private val ticketIdGenerator = object : TicketIdGenerator {
-    override fun generate() = ticketId()
-}
-
-fun ticket(price: BigDecimal = BigDecimal(Random.nextInt(1, 500000))): Ticket {
-    val ticket = Ticket.publishTicket(
-            ticketIdGenerator, FlightIsAnnounced, FlightIsNotToSoonForPublishing, flight(), price(price))
-    check(ticket is Either.Right<Ticket>)
-    return ticket.b
-}
-
 // Order
 fun orderId() = OrderId(Random.nextLong())
 
@@ -220,7 +202,11 @@ fun email(emailString: String = defaultEmail()): Email {
 
 private fun defaultEmail() = "${getRandomString(Random.nextInt(3, 1000))}@${getRandomString(Random.nextInt(3, 30))}"
 
-fun orderItem(passenger: Passenger = passenger(), ticket: Ticket = ticket()) = OrderItem.from(passenger, ticket)
+fun orderItem(
+    passenger: Passenger = passenger(),
+    ticketId: TicketId = ticketId(),
+    price: Price = price()
+) = OrderItem.from(passenger, ticketId, price)
 
 fun order(
     state: OrderState = OrderState.WAITING_FOR_PAYMENT,

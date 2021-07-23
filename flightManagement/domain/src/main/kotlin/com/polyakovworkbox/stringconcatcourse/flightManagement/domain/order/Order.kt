@@ -42,7 +42,7 @@ class Order internal constructor(
 
     fun totalPrice(): Price {
         return orderItems
-                .map { it.ticket.price }
+                .map { it.price }
                 .fold(Price.zero()) { total, it -> total.add(it) }
     }
 
