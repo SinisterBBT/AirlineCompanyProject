@@ -1,6 +1,6 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
 
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.arrivalAirport
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.arrivalDate
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.departureAirport
@@ -19,7 +19,7 @@ class FlightRestorerTest {
         val arrivalAirport = arrivalAirport()
         val departureDate = departureDate()
         val arrivalDate = arrivalDate()
-        val aircraft = aircraft()
+        val aircraftId = aircraftId()
         val version = version()
 
         val result = FlightRestorer.restoreFlight(
@@ -28,7 +28,7 @@ class FlightRestorerTest {
             arrivalAirport,
             departureDate,
             arrivalDate,
-            aircraft,
+            aircraftId,
             version
         )
 
@@ -37,6 +37,6 @@ class FlightRestorerTest {
         result.arrivalAirport shouldBe arrivalAirport
         result.departureDate shouldBe departureDate
         result.arrivalDate shouldBe arrivalDate
-        result.aircraft shouldBe aircraft
+        result.aircraftId shouldBe aircraftId
     }
 }

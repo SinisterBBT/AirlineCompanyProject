@@ -105,19 +105,19 @@ fun arrivalDate(zonedDateTime: ZonedDateTime = defaultArrivalDate()): ArrivalDat
 fun defaultArrivalDate(): ZonedDateTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow")).plusDays(45).plusHours(2)
 
 object AircraftIsInOperation : AircraftIsNotInOperation {
-    override fun check(registrationNumber: AircraftRegistrationNumber) = true
+    override fun check(aircraftId: AircraftId) = true
 }
 
 object AircraftDoesNotExist : AircraftIsNotInOperation {
-    override fun check(registrationNumber: AircraftRegistrationNumber) = false
+    override fun check(aircraftId: AircraftId) = false
 }
 
 object AircraftIsNotInFlight : AircraftIsAlreadyInFlight {
-    override fun check(registrationNumber: AircraftRegistrationNumber) = false
+    override fun check(aircraftId: AircraftId) = false
 }
 
 object AircraftIsAlreadyInFlight : AircraftIsAlreadyInFlight {
-    override fun check(registrationNumber: AircraftRegistrationNumber) = true
+    override fun check(aircraftId: AircraftId) = true
 }
 
 object AirportAllowsFlight : AirportAllowsFlight {
@@ -145,7 +145,7 @@ fun flight(): Flight {
             arrivalAirport(),
             departureDate(),
             arrivalDate(),
-            aircraft()
+            aircraftId()
     )
 
     check(result is Either.Right<Flight>)

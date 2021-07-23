@@ -6,7 +6,7 @@ import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.AggregateRoot
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.Aircraft
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftId
 
 class Flight internal constructor(
     id: FlightId,
@@ -14,7 +14,7 @@ class Flight internal constructor(
     val arrivalAirport: ArrivalAirport,
     val departureDate: DepartureDate,
     val arrivalDate: ArrivalDate,
-    val aircraft: Aircraft,
+    val aircraftId: AircraftId,
     version: Version
 ) : AggregateRoot<FlightId>(id, version) {
 
@@ -28,12 +28,12 @@ class Flight internal constructor(
             arrivalAirport: ArrivalAirport,
             departureDate: DepartureDate,
             arrivalDate: ArrivalDate,
-            aircraft: Aircraft
+            aircraftId: AircraftId
         ): Either<CannotAnnounceFlightError, Flight> {
             return when {
-                !aircraftIsNotInOperation.check(aircraft.registrationNumber) ->
+                !aircraftIsNotInOperation.check(aircraftId) ->
                     CannotAnnounceFlightError.AircraftIsNotInOperationError.left()
-                aircraftIsAlreadyInFlight.check(aircraft.registrationNumber) ->
+                aircraftIsAlreadyInFlight.check(aircraftId) ->
                     CannotAnnounceFlightError.AircraftIsAlreadyInFlightError.left()
                 !airportAllowsFlight.check(departureDate) ->
                     CannotAnnounceFlightError.AirportDoesNotAllowFlightError.left()
@@ -43,7 +43,7 @@ class Flight internal constructor(
                     arrivalAirport,
                     departureDate,
                     arrivalDate,
-                    aircraft,
+                    aircraftId,
                     Version.new()
                 ).apply {
                     addEvent(FlightAnnouncedDomainEvent(this.id))

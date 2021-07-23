@@ -1,7 +1,7 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
 
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.Aircraft
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftId
 
 object FlightRestorer {
 
@@ -11,7 +11,7 @@ object FlightRestorer {
         arrivalAirport: ArrivalAirport,
         departureDate: DepartureDate,
         arrivalDate: ArrivalDate,
-        aircraft: Aircraft,
+        aircraftId: AircraftId,
         version: Version
     ): Flight {
         return Flight(
@@ -20,7 +20,7 @@ object FlightRestorer {
             arrivalAirport,
             departureDate,
             arrivalDate,
-            aircraft,
+            aircraftId,
             version
         )
     }

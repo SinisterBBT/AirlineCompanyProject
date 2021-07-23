@@ -6,7 +6,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.AircraftIs
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.AircraftIsNotInFlight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.AirportAllowsFlight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.AirportDoesNotAllowFlight
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraftId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.arrivalAirport
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.arrivalDate
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.departureAirport
@@ -31,7 +31,7 @@ internal class FlightTest {
         val arrivalAirport = arrivalAirport()
         val departureDate = departureDate()
         val arrivalDate = arrivalDate()
-        val aircraft = aircraft()
+        val aircraftId = aircraftId()
 
         val newFlight = Flight.announceNewFlight(
             idGenerator,
@@ -42,13 +42,14 @@ internal class FlightTest {
             arrivalAirport,
             departureDate,
             arrivalDate,
-            aircraft)
+            aircraftId)
 
         newFlight shouldBeRight {
             it.departureAirport shouldBe departureAirport
             it.arrivalAirport shouldBe arrivalAirport
             it.departureDate shouldBe departureDate
             it.arrivalDate shouldBe arrivalDate
+            it.aircraftId shouldBe aircraftId
         }
     }
 
@@ -58,7 +59,7 @@ internal class FlightTest {
         val arrivalAirport = arrivalAirport()
         val departureDate = departureDate()
         val arrivalDate = arrivalDate()
-        val aircraft = aircraft()
+        val aircraftId = aircraftId()
 
         val newFlight = Flight.announceNewFlight(
                 idGenerator,
@@ -69,7 +70,7 @@ internal class FlightTest {
                 arrivalAirport,
                 departureDate,
                 arrivalDate,
-                aircraft)
+                aircraftId)
 
         newFlight shouldBeLeft CannotAnnounceFlightError.AircraftIsNotInOperationError
     }
@@ -80,7 +81,7 @@ internal class FlightTest {
         val arrivalAirport = arrivalAirport()
         val departureDate = departureDate()
         val arrivalDate = arrivalDate()
-        val aircraft = aircraft()
+        val aircraftId = aircraftId()
 
         val newFlight = Flight.announceNewFlight(
                 idGenerator,
@@ -91,7 +92,7 @@ internal class FlightTest {
                 arrivalAirport,
                 departureDate,
                 arrivalDate,
-                aircraft)
+                aircraftId)
 
         newFlight shouldBeLeft CannotAnnounceFlightError.AircraftIsAlreadyInFlightError
     }
@@ -102,7 +103,7 @@ internal class FlightTest {
         val arrivalAirport = arrivalAirport()
         val departureDate = departureDate()
         val arrivalDate = arrivalDate()
-        val aircraft = aircraft()
+        val aircraftId = aircraftId()
 
         val newFlight = Flight.announceNewFlight(
                 idGenerator,
@@ -113,7 +114,7 @@ internal class FlightTest {
                 arrivalAirport,
                 departureDate,
                 arrivalDate,
-                aircraft)
+                aircraftId)
 
         newFlight shouldBeLeft CannotAnnounceFlightError.AirportDoesNotAllowFlightError
     }

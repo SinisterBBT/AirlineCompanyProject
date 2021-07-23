@@ -1,7 +1,7 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
 
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftRegistrationNumber
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftId
 
 interface AircraftIsNotInOperation {
-    fun check(registrationNumber: AircraftRegistrationNumber): Boolean
+    fun check(aircraftId: AircraftId): Boolean
 }
