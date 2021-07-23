@@ -17,7 +17,7 @@ class OrderRestorerTest {
         val orderId = orderId()
         val email = email()
         val orderItems = listOf(orderItem(), orderItem(), orderItem())
-        val state = OrderState.COMPLETED
+        val state = OrderState.WAITING_FOR_PAYMENT
         val version = version()
 
         val result = OrderRestorer.restoreOrder(

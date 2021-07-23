@@ -43,16 +43,10 @@ class Order internal constructor(
     fun totalPrice(): Price {
         return orderItems
                 .map { it.ticket.price }
-                .fold(Price.zero(), { total, it -> total.add(it) })
+                .fold(Price.zero()) { total, it -> total.add(it) }
     }
 
-    fun confirm() = changeState(OrderState.CONFIRMED, OrderConfirmedDomainEvent(id))
-
     fun pay() = changeState(OrderState.PAID, OrderPaidDomainEvent(id))
-
-    fun complete() = changeState(OrderState.COMPLETED, OrderCompletedDomainEvent(id))
-
-    fun cancel() = changeState(OrderState.CANCELLED, OrderCancelledDomainEvent(id))
 
     private fun changeState(newState: OrderState, event: DomainEvent): Either<InvalidState, Unit> {
         return when {
@@ -65,8 +59,6 @@ class Order internal constructor(
             else -> InvalidState.left()
         }
     }
-
-    fun isActive(): Boolean = state.active
 }
 
 object OrderIsEmptyError : BusinessError
@@ -74,15 +66,10 @@ object OrderIsEmptyError : BusinessError
 object InvalidState : BusinessError
 
 enum class OrderState(
-    val active: Boolean,
     private val nextStates: Set<OrderState> = emptySet()
 ) {
-
-    CANCELLED(active = false),
-    COMPLETED(active = false),
-    CONFIRMED(active = true, nextStates = setOf(COMPLETED)),
-    PAID(active = true, nextStates = setOf(CONFIRMED, CANCELLED)),
-    WAITING_FOR_PAYMENT(active = true, nextStates = setOf(PAID));
+    PAID,
+    WAITING_FOR_PAYMENT(nextStates = setOf(PAID));
 
     fun canChangeTo(state: OrderState) = nextStates.contains(state)
 }

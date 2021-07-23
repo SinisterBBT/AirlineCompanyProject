@@ -223,7 +223,7 @@ private fun defaultEmail() = "${getRandomString(Random.nextInt(3, 1000))}@${getR
 fun orderItem(passenger: Passenger = passenger(), ticket: Ticket = ticket()) = OrderItem.from(passenger, ticket)
 
 fun order(
-    state: OrderState = OrderState.COMPLETED,
+    state: OrderState = OrderState.WAITING_FOR_PAYMENT,
     orderItems: List<OrderItem> = listOf(orderItem()),
 ): Order {
     return OrderRestorer.restoreOrder(

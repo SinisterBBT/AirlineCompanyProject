@@ -13,8 +13,6 @@ import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.comparables.shouldBeEqualComparingTo
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.EnumSource
 import java.math.BigDecimal
 
 internal class OrderTest {
@@ -48,56 +46,6 @@ internal class OrderTest {
         result shouldBeLeft OrderIsEmptyError
     }
 
-    @ParameterizedTest
-    @EnumSource(names = ["WAITING_FOR_PAYMENT", "CONFIRMED", "PAID"])
-    fun `active - true`(state: OrderState) {
-        val order = order(state = state)
-
-        order.isActive() shouldBe true
-    }
-
-    @ParameterizedTest
-    @EnumSource(names = ["COMPLETED", "CANCELLED"])
-    fun `active - false`(state: OrderState) {
-        val order = order(state = state)
-
-        order.isActive() shouldBe false
-    }
-
-    @Test
-    fun `complete order - success`() {
-        val order = order(state = OrderState.CONFIRMED)
-
-        order.let {
-            it.complete() shouldBeRight Unit
-            it.state shouldBe OrderState.COMPLETED
-            it.popEvents() shouldContainExactlyInAnyOrder listOf(OrderCompletedDomainEvent(order.id))
-        }
-    }
-
-    @Test
-    fun `complete order - already`() {
-        val order = order(state = OrderState.COMPLETED)
-
-        order.let {
-            it.complete() shouldBeRight Unit
-            it.state shouldBe OrderState.COMPLETED
-            it.popEvents().shouldBeEmpty()
-        }
-    }
-
-    @ParameterizedTest
-    @EnumSource(names = ["WAITING_FOR_PAYMENT", "PAID", "CANCELLED"])
-    fun `complete order - invalid state`(state: OrderState) {
-        val order = order(state = state)
-
-        order.let {
-            it.complete() shouldBeLeft InvalidState
-            it.state shouldBe state
-            it.popEvents().shouldBeEmpty()
-        }
-    }
-
     @Test
     fun `pay order - success`() {
         val order = order(state = OrderState.WAITING_FOR_PAYMENT)
@@ -116,86 +64,6 @@ internal class OrderTest {
         order.let {
             it.pay() shouldBeRight Unit
             it.state shouldBe OrderState.PAID
-            it.popEvents().shouldBeEmpty()
-        }
-    }
-
-    @ParameterizedTest
-    @EnumSource(names = ["CONFIRMED", "COMPLETED", "CANCELLED"])
-    fun `pay - invalid state`(state: OrderState) {
-        val order = order(state = state)
-
-        order.let {
-            it.pay() shouldBeLeft InvalidState
-            it.state shouldBe state
-            it.popEvents().shouldBeEmpty()
-        }
-    }
-
-    @Test
-    fun `cancel order - success`() {
-        val order = order(state = OrderState.PAID)
-
-        order.let {
-            it.cancel() shouldBeRight Unit
-            it.state shouldBe OrderState.CANCELLED
-            it.popEvents() shouldContainExactlyInAnyOrder listOf(OrderCancelledDomainEvent(order.id))
-        }
-    }
-
-    @Test
-    fun `cancel order - already`() {
-        val order = order(state = OrderState.CANCELLED)
-
-        order.let {
-            it.cancel() shouldBeRight Unit
-            it.state shouldBe OrderState.CANCELLED
-            it.popEvents().shouldBeEmpty()
-        }
-    }
-
-    @ParameterizedTest
-    @EnumSource(names = ["CONFIRMED", "COMPLETED", "WAITING_FOR_PAYMENT"])
-    fun `cancel - invalid state`(state: OrderState) {
-        val order = order(state = state)
-
-        order.let {
-            it.cancel() shouldBeLeft InvalidState
-            it.state shouldBe state
-            it.popEvents().shouldBeEmpty()
-        }
-    }
-
-    @Test
-    fun `confirm order - success`() {
-        val order = order(state = OrderState.PAID)
-
-        order.let {
-            it.confirm() shouldBeRight Unit
-            it.state shouldBe OrderState.CONFIRMED
-            it.popEvents() shouldContainExactlyInAnyOrder listOf(OrderConfirmedDomainEvent(order.id))
-        }
-    }
-
-    @Test
-    fun `confirm order - already`() {
-        val order = order(state = OrderState.CONFIRMED)
-
-        order.let {
-            it.confirm() shouldBeRight Unit
-            it.state shouldBe OrderState.CONFIRMED
-            it.popEvents().shouldBeEmpty()
-        }
-    }
-
-    @ParameterizedTest
-    @EnumSource(names = ["CANCELLED", "COMPLETED", "WAITING_FOR_PAYMENT"])
-    fun `confirm - invalid state`(state: OrderState) {
-        val order = order(state = state)
-
-        order.let {
-            it.confirm() shouldBeLeft InvalidState
-            it.state shouldBe state
             it.popEvents().shouldBeEmpty()
         }
     }
