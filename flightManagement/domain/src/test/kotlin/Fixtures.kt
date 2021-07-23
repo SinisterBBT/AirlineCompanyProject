@@ -186,11 +186,13 @@ private fun defaultFullName() =
                 "${getRandomString(Random.nextInt(3, 30))} " +
                 getRandomString(Random.nextInt(3, 30))
 
-fun passportData(passportData: String = "${Random.nextInt()} ${Random.nextInt()}"): PassportData {
+fun passportData(passportData: String = defaultPassportData()): PassportData {
     val result = PassportData.from(passportData)
     check(result is Either.Right<PassportData>)
     return result.b
 }
+
+private fun defaultPassportData() = "${Random.nextInt(1111, 9999)} ${Random.nextInt(111111, 999999)}"
 
 // OrderItem VO
 fun passenger(fullName: FullName = fullName(), passportData: PassportData = passportData()) =

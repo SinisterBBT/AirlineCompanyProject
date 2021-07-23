@@ -8,9 +8,18 @@ import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 
 data class PassportData internal constructor(val passportData: String) : ValueObject {
     companion object {
+        private const val PASSPORT_SERIAL_LENGTH = 4
+        private const val PASSPORT_NUMBER_LENGTH = 6
+
         fun from(passportData: String): Either<EmptyPassportDataError, PassportData> {
-            return if (passportData.isNotBlank()) {
-                PassportData(passportData).right()
+            if (passportData.isBlank()) {
+                return EmptyPassportDataError.left()
+            }
+            val passportNoParts = passportData.split(" ")
+            return if (passportNoParts.size == 2 &&
+                    passportNoParts[0].length == PASSPORT_SERIAL_LENGTH &&
+                    passportNoParts[1].length == PASSPORT_NUMBER_LENGTH) {
+                        PassportData(passportData).right()
             } else {
                 EmptyPassportDataError.left()
             }
