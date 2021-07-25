@@ -1,4 +1,4 @@
-package com.polyakovworkbox.stringconcatcourse.leasing.domain
+package com.polyakovworkbox.stringconcatcourse.leasing.usecase
 
 import arrow.core.Either
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version

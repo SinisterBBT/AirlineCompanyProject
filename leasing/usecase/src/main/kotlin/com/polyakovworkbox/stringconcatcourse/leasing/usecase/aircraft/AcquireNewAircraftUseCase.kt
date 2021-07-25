@@ -1,0 +1,3 @@
+package com.polyakovworkbox.stringconcatcourse.leasing.usecase.aircraft
+
+class AcquireNewAircraftUseCase : AcquireNewAircraft
