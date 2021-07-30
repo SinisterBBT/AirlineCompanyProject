@@ -2,12 +2,13 @@ package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft
 
 import com.polyakovworkbox.stringconcatcourse.common.types.base.AggregateRoot
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
+import com.polyakovworkbox.stringconcatcourse.common.types.common.Count
 
 class Aircraft internal constructor(
     id: AircraftId,
     val registrationNumber: AircraftRegistrationNumber,
     val model: AircraftModel,
-    val seatCount: AircraftSeatCount,
+    val seatCount: Count,
     version: Version
 ) : AggregateRoot<AircraftId>(id, version) {
 
@@ -16,7 +17,7 @@ class Aircraft internal constructor(
             idGenerator: AircraftIdGenerator,
             registrationNumber: AircraftRegistrationNumber,
             model: AircraftModel,
-            seatCount: AircraftSeatCount,
+            seatCount: Count,
         ): Aircraft {
             return Aircraft(
                     idGenerator.generate(),

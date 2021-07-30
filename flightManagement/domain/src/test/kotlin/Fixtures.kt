@@ -3,10 +3,10 @@ package com.polyakovworkbox.stringconcatcourse.flightManagement.domain
 import arrow.core.Either
 
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
+import com.polyakovworkbox.stringconcatcourse.common.types.common.Count
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftModel
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftRegistrationNumber
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftSeatCount
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsAlreadyInFlight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsNotInOperation
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AirportAllowsFlight
@@ -54,9 +54,9 @@ fun aircraftModel(model: String = "Model ${Random.nextInt()}"): AircraftModel {
     return result.b
 }
 
-fun seatCount(seatCount: Int = Random.nextInt(1, 2000)): AircraftSeatCount {
-    val result = AircraftSeatCount.from(seatCount)
-    check(result is Either.Right<AircraftSeatCount>)
+fun seatCount(seatCount: Int = Random.nextInt(1, 2000)): Count {
+    val result = Count.from(seatCount)
+    check(result is Either.Right<Count>)
     return result.b
 }
 
