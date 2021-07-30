@@ -31,6 +31,8 @@ class Flight internal constructor(
             aircraftId: AircraftId
         ): Either<CannotAnnounceFlightError, Flight> {
             return when {
+                !arrivalDate.isAfter(departureDate) ->
+                    CannotAnnounceFlightError.ArrivalDateCannotBeBeforeDepartureDate.left()
                 !aircraftIsNotInOperation.check(aircraftId) ->
                     CannotAnnounceFlightError.AircraftIsNotInOperationError.left()
                 aircraftIsAlreadyInFlight.check(aircraftId) ->
@@ -54,6 +56,7 @@ class Flight internal constructor(
 }
 
 sealed class CannotAnnounceFlightError : BusinessError {
+    object ArrivalDateCannotBeBeforeDepartureDate : CannotAnnounceFlightError()
     object AircraftIsNotInOperationError : CannotAnnounceFlightError()
     object AircraftIsAlreadyInFlightError : CannotAnnounceFlightError()
     object AirportDoesNotAllowFlightError : CannotAnnounceFlightError()

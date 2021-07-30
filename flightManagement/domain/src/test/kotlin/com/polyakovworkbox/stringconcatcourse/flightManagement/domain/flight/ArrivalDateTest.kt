@@ -2,6 +2,7 @@ package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
 
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.arrivalDate
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.defaultArrivalDate
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.departureDate
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe
@@ -30,10 +31,30 @@ internal class ArrivalDateTest {
     }
 
     @Test
-    fun `arrival date create - too late`() {
-        val timeNow = ZonedDateTime.now()
+    fun `arrival date create - in the past`() {
+        val timeNow = ZonedDateTime.now().minusDays(1)
         val arrivalDate = ArrivalDate.from(timeNow)
 
-        arrivalDate shouldBeLeft ArrivalDateToSoonError
+        arrivalDate shouldBeLeft ArrivalDateIsInThePast
+    }
+
+    @Test
+    fun `arrival date is after given departure date`() {
+        val arrivalDate = arrivalDate(ZonedDateTime.now().plusHours(12))
+        val departureDate = departureDate(ZonedDateTime.now().plusHours(10))
+
+        val result = arrivalDate.isAfter(departureDate)
+
+        result shouldBe true
+    }
+
+    @Test
+    fun `arrival date is before given departure date`() {
+        val arrivalDate = arrivalDate(ZonedDateTime.now().plusHours(10))
+        val departureDate = departureDate(ZonedDateTime.now().plusHours(12))
+
+        val result = arrivalDate.isAfter(departureDate)
+
+        result shouldBe false
     }
 }

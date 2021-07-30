@@ -10,14 +10,16 @@ import java.time.ZonedDateTime
 data class ArrivalDate internal constructor(val arrivalDate: ZonedDateTime) : ValueObject {
 
     companion object {
-        fun from(arrivalDate: ZonedDateTime): Either<ArrivalDateToSoonError, ArrivalDate> {
-            return if (arrivalDate.isBefore(ZonedDateTime.now(arrivalDate.zone).plusHours(1))) {
-                ArrivalDateToSoonError.left()
+        fun from(arrivalDate: ZonedDateTime): Either<ArrivalDateIsInThePast, ArrivalDate> {
+            return if (arrivalDate.isBefore(ZonedDateTime.now(arrivalDate.zone))) {
+                ArrivalDateIsInThePast.left()
             } else {
                 ArrivalDate(arrivalDate).right()
             }
         }
     }
+
+    fun isAfter(departureDate: DepartureDate): Boolean = arrivalDate.isAfter(departureDate.departureDate)
 }
 
-object ArrivalDateToSoonError : BusinessError
+object ArrivalDateIsInThePast : BusinessError

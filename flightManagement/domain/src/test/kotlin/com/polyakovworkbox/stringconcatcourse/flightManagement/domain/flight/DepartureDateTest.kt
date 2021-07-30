@@ -30,11 +30,11 @@ internal class DepartureDateTest {
     }
 
     @Test
-    fun `departure date create - too late`() {
-        val timeNow = ZonedDateTime.now()
+    fun `departure date create - in the past`() {
+        val timeNow = ZonedDateTime.now().minusDays(1)
         val departureDate = DepartureDate.from(timeNow)
 
-        departureDate shouldBeLeft DepartureDateToSoonError
+        departureDate shouldBeLeft DepartureDateIsInThePast
     }
 
     @Test
@@ -48,7 +48,7 @@ internal class DepartureDateTest {
     }
 
     @Test
-    fun `departure is not  within given date`() {
+    fun `departure is not within given date`() {
         val timeTillDeparture = ZonedDateTime.now().plusMinutes(100)
         val departureDate = departureDate(timeTillDeparture)
 
