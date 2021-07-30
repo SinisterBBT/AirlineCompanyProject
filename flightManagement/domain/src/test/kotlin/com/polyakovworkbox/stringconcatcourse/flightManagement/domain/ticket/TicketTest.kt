@@ -2,11 +2,10 @@ package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket
 
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsAnnounced
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsNotAnnounced
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsNotToSoonForPublishing
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.FlightIsToSoonForPublishing
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flightId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.price
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticketId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.toLateDepartureDate
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe
@@ -22,32 +21,30 @@ internal class TicketTest {
 
     @Test
     fun `publish new ticket - success`() {
-        val flightId = flightId()
+        val flight = flight()
         val price = price()
 
         val result = Ticket.publishTicket(
                 idGenerator,
                 FlightIsAnnounced,
-                FlightIsNotToSoonForPublishing,
-                flightId,
+                flight,
                 price)
 
         result shouldBeRight {
-            it.flightId shouldBe flightId
+            it.flightId shouldBe flight.id
             it.price shouldBe price
         }
     }
 
     @Test
     fun `publish new ticket - flight is not announced`() {
-        val flightId = flightId()
+        val flight = flight()
         val price = price()
 
         val result = Ticket.publishTicket(
                 idGenerator,
                 FlightIsNotAnnounced,
-                FlightIsNotToSoonForPublishing,
-                flightId,
+                flight,
                 price)
 
         result shouldBeLeft WrongTicketError.FlightIsNotAnnouncedError
@@ -55,14 +52,13 @@ internal class TicketTest {
 
     @Test
     fun `publish new ticket - flight is too soon`() {
-        val flightId = flightId()
+        val flight = flight(toLateDepartureDate())
         val price = price()
 
         val result = Ticket.publishTicket(
                 idGenerator,
                 FlightIsAnnounced,
-                FlightIsToSoonForPublishing,
-                flightId,
+                flight,
                 price)
 
         result shouldBeLeft WrongTicketError.FlightIsToSoonForPublishingError

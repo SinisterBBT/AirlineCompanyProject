@@ -6,6 +6,7 @@ import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.AggregateRoot
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Flight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightId
 
 class Ticket internal constructor(
@@ -16,20 +17,22 @@ class Ticket internal constructor(
 ) : AggregateRoot<TicketId>(id, version) {
 
     companion object {
+        private const val MINUTES_BEFORE_DEPARTURE_WHEN_TICKETS_CANNOT_BE_PUBLISHED: Long = 60
+
         fun publishTicket(
             idGenerator: TicketIdGenerator,
             flightIsAnnounced: FlightIsAnnounced,
-            flightIsToSoonForPublishing: FlightIsToSoonForPublishing,
-            flightId: FlightId,
+            flight: Flight,
             price: Price
         ): Either<WrongTicketError, Ticket> {
             return when {
-                !flightIsAnnounced.check(flightId) ->
+                !flightIsAnnounced.check(flight.id) ->
                     WrongTicketError.FlightIsNotAnnouncedError.left()
-                flightIsToSoonForPublishing.check(flightId) ->
+                flight.departureDate.isWithinTheTimeFromNowPlusMinutes(
+                        MINUTES_BEFORE_DEPARTURE_WHEN_TICKETS_CANNOT_BE_PUBLISHED) ->
                     WrongTicketError.FlightIsToSoonForPublishingError.left()
                 else ->
-                    Ticket(idGenerator.generate(), flightId, price, Version.new()).apply {
+                    Ticket(idGenerator.generate(), flight.id, price, Version.new()).apply {
                         addEvent(TicketPublishedDomainEvent(this.id))
                     }.right()
             }

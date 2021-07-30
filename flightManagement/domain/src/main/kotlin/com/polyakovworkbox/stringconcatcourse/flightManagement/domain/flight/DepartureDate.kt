@@ -10,14 +10,20 @@ import java.time.ZonedDateTime
 data class DepartureDate internal constructor(val departureDate: ZonedDateTime) : ValueObject {
 
     companion object {
+        private const val MINUTES_FROM_NOW_WHEN_NEW_DEPARTURE_ANNOUNCEMENT_IS_FORBIDDEN: Long = 60
+
         fun from(departureDate: ZonedDateTime): Either<DepartureDateToSoonError, DepartureDate> {
-            return if (departureDate.isBefore(ZonedDateTime.now(departureDate.zone).plusHours(1))) {
+            return if (departureDate.isBefore(ZonedDateTime.now(departureDate.zone)
+                            .plusMinutes(MINUTES_FROM_NOW_WHEN_NEW_DEPARTURE_ANNOUNCEMENT_IS_FORBIDDEN))) {
                 DepartureDateToSoonError.left()
             } else {
                 DepartureDate(departureDate).right()
             }
         }
     }
+
+    fun isWithinTheTimeFromNowPlusMinutes(minutes: Long) =
+            departureDate.isBefore(ZonedDateTime.now(departureDate.zone).plusMinutes(minutes))
 }
 
 object DepartureDateToSoonError : BusinessError

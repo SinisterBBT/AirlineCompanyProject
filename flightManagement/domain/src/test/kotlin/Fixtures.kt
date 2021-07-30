@@ -4,7 +4,6 @@ import arrow.core.Either
 
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftId
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftIdGenerator
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftModel
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftRegistrationNumber
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftSeatCount
@@ -28,7 +27,6 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Orde
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Passenger
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.PassportData
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsAnnounced
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsToSoonForPublishing
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Price
 import java.math.BigDecimal
@@ -62,10 +60,6 @@ fun seatCount(seatCount: Int = Random.nextInt(1, 2000)): AircraftSeatCount {
     return result.b
 }
 
-val aircraftIdGenerator = object : AircraftIdGenerator {
-    override fun generate() = aircraftId()
-}
-
 // Flight aggregate
 fun flightId() = FlightId(Random.nextLong())
 
@@ -88,6 +82,8 @@ fun departureDate(zonedDateTime: ZonedDateTime = defaultDepartureDate()): Depart
 }
 
 fun defaultDepartureDate(): ZonedDateTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow")).plusDays(45)
+
+fun toLateDepartureDate(): DepartureDate = DepartureDate(ZonedDateTime.now(ZoneId.of("Europe/Moscow")).plusMinutes(30))
 
 fun arrivalDate(zonedDateTime: ZonedDateTime = defaultArrivalDate()): ArrivalDate {
     val result = ArrivalDate.from(zonedDateTime)
@@ -128,7 +124,7 @@ val flightIdGenerator = object : FlightIdGenerator {
 // Ticket aggregate
 fun ticketId(ticketId: Long = Random.nextLong()) = TicketId(ticketId)
 
-fun flight(): Flight {
+fun flight(departureDate: DepartureDate = departureDate(defaultDepartureDate())): Flight {
     val result = Flight.announceNewFlight(
             flightIdGenerator,
             AircraftIsInOperation,
@@ -136,7 +132,7 @@ fun flight(): Flight {
             AirportAllowsFlight,
             departureAirport(),
             arrivalAirport(),
-            departureDate(),
+            departureDate,
             arrivalDate(),
             aircraftId()
     )
@@ -156,14 +152,6 @@ object FlightIsAnnounced : FlightIsAnnounced {
 }
 
 object FlightIsNotAnnounced : FlightIsAnnounced {
-    override fun check(flightId: FlightId) = false
-}
-
-object FlightIsToSoonForPublishing : FlightIsToSoonForPublishing {
-    override fun check(flightId: FlightId) = true
-}
-
-object FlightIsNotToSoonForPublishing : FlightIsToSoonForPublishing {
     override fun check(flightId: FlightId) = false
 }
 

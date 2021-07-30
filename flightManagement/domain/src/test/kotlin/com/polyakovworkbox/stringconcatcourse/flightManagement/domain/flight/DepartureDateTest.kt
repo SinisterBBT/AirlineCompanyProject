@@ -12,9 +12,9 @@ internal class DepartureDateTest {
 
     @Test
     fun `DepartureDate is equal to other DepartureDate with the same value`() {
-        val arrivalDate = defaultDepartureDate()
-        val firstValue = departureDate(arrivalDate)
-        val secondValue = departureDate(arrivalDate)
+        val departureDate = defaultDepartureDate()
+        val firstValue = departureDate(departureDate)
+        val secondValue = departureDate(departureDate)
 
         (firstValue == secondValue) shouldBe true
     }
@@ -35,5 +35,25 @@ internal class DepartureDateTest {
         val departureDate = DepartureDate.from(timeNow)
 
         departureDate shouldBeLeft DepartureDateToSoonError
+    }
+
+    @Test
+    fun `departure is within given date`() {
+        val timeTillDeparture = ZonedDateTime.now().plusMinutes(90)
+        val departureDate = departureDate(timeTillDeparture)
+
+        val result = departureDate.isWithinTheTimeFromNowPlusMinutes(100)
+
+        result shouldBe true
+    }
+
+    @Test
+    fun `departure is not  within given date`() {
+        val timeTillDeparture = ZonedDateTime.now().plusMinutes(100)
+        val departureDate = departureDate(timeTillDeparture)
+
+        val result = departureDate.isWithinTheTimeFromNowPlusMinutes(90)
+
+        result shouldBe false
     }
 }
