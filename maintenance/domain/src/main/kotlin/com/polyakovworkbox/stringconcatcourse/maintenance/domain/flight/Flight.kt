@@ -6,12 +6,13 @@ import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.AggregateRoot
 import com.polyakovworkbox.stringconcatcourse.common.types.base.DomainEvent
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
+import com.polyakovworkbox.stringconcatcourse.common.types.common.Airport
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 
 class Flight internal constructor(
     id: FlightId,
-    val departureAirport: DepartureAirport,
-    val actualArrivalAirport: ActualArrivalAirport,
+    val departureAirport: Airport,
+    val actualArrivalAirport: Airport,
     val flightTime: FlightTime,
     version: Version
 ) : AggregateRoot<FlightId>(id, version) {
@@ -24,8 +25,8 @@ class Flight internal constructor(
     companion object {
         fun registerFlight(
             idGenerator: FlightIdGenerator,
-            departureAirport: DepartureAirport,
-            actualArrivalAirport: ActualArrivalAirport,
+            departureAirport: Airport,
+            actualArrivalAirport: Airport,
             flightTime: FlightTime,
         ): Flight {
             return Flight(

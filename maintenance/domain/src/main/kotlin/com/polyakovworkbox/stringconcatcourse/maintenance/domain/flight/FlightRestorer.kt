@@ -1,13 +1,14 @@
 package com.polyakovworkbox.stringconcatcourse.maintenance.domain.flight
 
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
+import com.polyakovworkbox.stringconcatcourse.common.types.common.Airport
 
 object FlightRestorer {
 
     fun restoreFlight(
         id: FlightId,
-        departureAirport: DepartureAirport,
-        actualArrivalAirport: ActualArrivalAirport,
+        departureAirport: Airport,
+        actualArrivalAirport: Airport,
         flightTime: FlightTime,
         state: FlightState,
         version: Version

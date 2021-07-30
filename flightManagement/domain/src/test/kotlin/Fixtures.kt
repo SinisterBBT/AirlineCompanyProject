@@ -3,6 +3,7 @@ package com.polyakovworkbox.stringconcatcourse.flightManagement.domain
 import arrow.core.Either
 
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
+import com.polyakovworkbox.stringconcatcourse.common.types.common.Airport
 import com.polyakovworkbox.stringconcatcourse.common.types.common.Count
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftModel
@@ -10,8 +11,6 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.A
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsAlreadyInFlight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsNotInOperation
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AirportAllowsFlight
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.ArrivalAirport
-import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.DepartureAirport
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.DepartureDate
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.ArrivalDate
@@ -63,15 +62,15 @@ fun seatCount(seatCount: Int = Random.nextInt(1, 2000)): Count {
 // Flight aggregate
 fun flightId() = FlightId(Random.nextLong())
 
-fun departureAirport(departureAirport: String = "LED"): DepartureAirport {
-    val result = DepartureAirport.from(departureAirport)
-    check(result is Either.Right<DepartureAirport>)
+fun departureAirport(departureAirport: String = "LED"): Airport {
+    val result = Airport.from(departureAirport)
+    check(result is Either.Right<Airport>)
     return result.b
 }
 
-fun arrivalAirport(arrivalAirport: String = "MSK"): ArrivalAirport {
-    val result = ArrivalAirport.from(arrivalAirport)
-    check(result is Either.Right<ArrivalAirport>)
+fun arrivalAirport(arrivalAirport: String = "MSK"): Airport {
+    val result = Airport.from(arrivalAirport)
+    check(result is Either.Right<Airport>)
     return result.b
 }
 

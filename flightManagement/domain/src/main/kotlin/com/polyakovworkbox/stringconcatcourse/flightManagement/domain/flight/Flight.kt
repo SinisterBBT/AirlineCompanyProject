@@ -5,13 +5,14 @@ import arrow.core.left
 import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.AggregateRoot
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
+import com.polyakovworkbox.stringconcatcourse.common.types.common.Airport
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftId
 
 class Flight internal constructor(
     id: FlightId,
-    val departureAirport: DepartureAirport,
-    val arrivalAirport: ArrivalAirport,
+    val departureAirport: Airport,
+    val arrivalAirport: Airport,
     val departureDate: DepartureDate,
     val arrivalDate: ArrivalDate,
     val aircraftId: AircraftId,
@@ -24,8 +25,8 @@ class Flight internal constructor(
             aircraftIsNotInOperation: AircraftIsNotInOperation,
             aircraftIsAlreadyInFlight: AircraftIsAlreadyInFlight,
             airportAllowsFlight: AirportAllowsFlight,
-            departureAirport: DepartureAirport,
-            arrivalAirport: ArrivalAirport,
+            departureAirport: Airport,
+            arrivalAirport: Airport,
             departureDate: DepartureDate,
             arrivalDate: ArrivalDate,
             aircraftId: AircraftId

@@ -1,6 +1,6 @@
-package com.polyakovworkbox.stringconcatcourse.maintenance.domain.flight
+package com.polyakovworkbox.stringconcatcourse.common.types.common
 
-import com.polyakovworkbox.stringconcatcourse.maintenance.domain.departureAirport
+import com.polyakovworkbox.stringconcatcourse.common.types.airport
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe
@@ -8,20 +8,19 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class DepartureAirportTest {
+class AirportTest {
 
     @Test
-    fun `DepartureAirport is equal to other DepartureAirport with the same value`() {
-        val departureAirport = "LED"
-        val firstValue = departureAirport(departureAirport)
-        val secondValue = departureAirport(departureAirport)
+    fun `ArrivalAirport is equal to other ArrivalAirport with the same value`() {
+        val firstValue = airport()
+        val secondValue = airport()
 
         (firstValue == secondValue) shouldBe true
     }
 
     @Test
     fun `create airport - success`() {
-        val airport = DepartureAirport.from("LED")
+        val airport = Airport.from("LED")
 
         airport shouldBeRight {
             it.iataCode shouldBe "LED"
@@ -31,7 +30,7 @@ internal class DepartureAirportTest {
     @ParameterizedTest
     @ValueSource(strings = ["", " ", "A", "AB", "ABCD", "A_B", "led"])
     fun `create airport - wrong airport name format`(iataCode: String) {
-        val airport = DepartureAirport.from(iataCode)
+        val airport = Airport.from(iataCode)
 
         airport shouldBeLeft WrongIataCode
     }

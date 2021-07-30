@@ -2,8 +2,7 @@ package com.polyakovworkbox.stringconcatcourse.maintenance.domain
 
 import arrow.core.Either
 import com.polyakovworkbox.stringconcatcourse.common.types.base.Version
-import com.polyakovworkbox.stringconcatcourse.maintenance.domain.flight.ActualArrivalAirport
-import com.polyakovworkbox.stringconcatcourse.maintenance.domain.flight.DepartureAirport
+import com.polyakovworkbox.stringconcatcourse.common.types.common.Airport
 import com.polyakovworkbox.stringconcatcourse.maintenance.domain.flight.FlightId
 import com.polyakovworkbox.stringconcatcourse.maintenance.domain.flight.FlightIdGenerator
 import com.polyakovworkbox.stringconcatcourse.maintenance.domain.flight.FlightRestorer
@@ -19,15 +18,15 @@ private val idGenerator = object : FlightIdGenerator {
     override fun generate() = flightId()
 }
 
-fun departureAirport(departureAirport: String = "LED"): DepartureAirport {
-    val result = DepartureAirport.from(departureAirport)
-    check(result is Either.Right<DepartureAirport>)
+fun departureAirport(departureAirport: String = "LED"): Airport {
+    val result = Airport.from(departureAirport)
+    check(result is Either.Right<Airport>)
     return result.b
 }
 
-fun actualArrivalAirport(arrivalAirport: String = "MSK"): ActualArrivalAirport {
-    val result = ActualArrivalAirport.from(arrivalAirport)
-    check(result is Either.Right<ActualArrivalAirport>)
+fun actualArrivalAirport(arrivalAirport: String = "MSK"): Airport {
+    val result = Airport.from(arrivalAirport)
+    check(result is Either.Right<Airport>)
     return result.b
 }
 
