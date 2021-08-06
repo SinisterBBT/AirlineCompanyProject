@@ -1,5 +1,12 @@
 package com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft
 
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftModel
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftId
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftContractNumber
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftManufactureDate
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.payloadCapacity
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraftRegistrationNumber
+import com.polyakovworkbox.stringconcatcourse.leasing.domain.seatMap
 import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe
@@ -13,27 +20,27 @@ class AircraftTest {
         override fun generate() = aircraftId
     }
 
-    private object AircraftExist : AircraftAlreadyExistsChecker {
+    private object AircraftExist : AircraftAlreadyExists {
         override fun check(registrationNumber: AircraftRegistrationNumber) = true
     }
 
-    private object AircraftDoesNotExist : AircraftAlreadyExistsChecker {
+    private object AircraftDoesNotExist : AircraftAlreadyExists {
         override fun check(registrationNumber: AircraftRegistrationNumber) = false
     }
 
     @Test
     fun `add aircraft to the fleet - success`() {
-        val aircraftAlreadyExistsChecker = AircraftDoesNotExist
+        val aircraftAlreadyExists = AircraftDoesNotExist
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
-        val registrationNumber = registrationNumber()
+        val registrationNumber = aircraftRegistrationNumber()
         val seatMap = seatMap()
-        val contractNumber = contractNumber()
-        val manufactureDate = manufactureDate()
+        val contractNumber = aircraftContractNumber()
+        val manufactureDate = aircraftManufactureDate()
 
         val result = Aircraft.acquireNewAircraft(
             idGenerator,
-            aircraftAlreadyExistsChecker,
+            aircraftAlreadyExists,
             model,
             payloadCapacity,
             registrationNumber,
@@ -55,17 +62,17 @@ class AircraftTest {
 
     @Test
     fun `add aircraft to the fleet - with the exiting registration number`() {
-        val aircraftAlreadyExistsChecker = AircraftExist
+        val aircraftAlreadyExists = AircraftExist
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
-        val registrationNumber = registrationNumber()
+        val registrationNumber = aircraftRegistrationNumber()
         val seatMap = seatMap()
-        val contractNumber = contractNumber()
-        val manufactureDate = manufactureDate()
+        val contractNumber = aircraftContractNumber()
+        val manufactureDate = aircraftManufactureDate()
 
         val result = Aircraft.acquireNewAircraft(
             idGenerator,
-            aircraftAlreadyExistsChecker,
+            aircraftAlreadyExists,
             model,
             payloadCapacity,
             registrationNumber,

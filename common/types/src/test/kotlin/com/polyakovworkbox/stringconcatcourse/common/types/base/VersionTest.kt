@@ -7,6 +7,14 @@ import kotlin.random.Random
 internal class VersionTest {
 
     @Test
+    fun `version is equal to other version with the same value`() {
+        val firstValue = Version.new()
+        val secondValue = Version.new()
+
+        (firstValue == secondValue) shouldBe true
+    }
+
+    @Test
     fun `new id - check version is zero`() {
         val firstVersion = Version.new()
         val secondVersion = Version.new()

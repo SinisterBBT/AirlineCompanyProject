@@ -10,6 +10,14 @@ import org.junit.jupiter.params.provider.ValueSource
 
 internal class CountTest {
 
+    @Test
+    fun `count is equal to other count with the same value`() {
+        val firstValue = count(1)
+        val secondValue = count(1)
+
+        (firstValue == secondValue) shouldBe true
+    }
+
     @ParameterizedTest
     @ValueSource(ints = [0, 1, Int.MAX_VALUE])
     fun `create count - success`(value: Int) {

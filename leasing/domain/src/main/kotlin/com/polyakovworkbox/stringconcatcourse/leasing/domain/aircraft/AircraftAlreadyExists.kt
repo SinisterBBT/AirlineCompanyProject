@@ -1,5 +1,5 @@
 package com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft
 
-interface AircraftAlreadyExistsChecker {
+interface AircraftAlreadyExists {
     fun check(registrationNumber: AircraftRegistrationNumber): Boolean
 }

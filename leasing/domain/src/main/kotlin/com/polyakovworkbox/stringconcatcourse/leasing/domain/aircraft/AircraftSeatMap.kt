@@ -6,10 +6,10 @@ import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 
-class AircraftSeatMap internal constructor(val seatMap: ArrayList<Seat>) : ValueObject {
+data class AircraftSeatMap internal constructor(val seatMap: List<Seat>) : ValueObject {
 
     companion object {
-        fun from(seatMap: ArrayList<Seat>): Either<WrongSeatMapLayout, AircraftSeatMap> =
+        fun from(seatMap: List<Seat>): Either<WrongSeatMapLayout, AircraftSeatMap> =
             if (seatMap.isNotEmpty()) {
                 AircraftSeatMap(seatMap).right()
             } else {

@@ -6,7 +6,7 @@ import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 
-class AircraftContractNumber internal constructor(val contractNumber: String) : ValueObject {
+data class AircraftContractNumber internal constructor(val contractNumber: String) : ValueObject {
 
     companion object {
         fun from(contractNumber: String): Either<EmptyContractNumberError, AircraftContractNumber> =

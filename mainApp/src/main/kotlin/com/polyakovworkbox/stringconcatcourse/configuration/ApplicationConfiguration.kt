@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Import
 
 @Configuration
 @Import(
-        LeasingConfiguration::class,
+        LeasingContextConfiguration::class,
+        FlightManagementContextConfiguration::class,
+        MaintenanceContextConfiguration::class
 )
 class ApplicationConfiguration

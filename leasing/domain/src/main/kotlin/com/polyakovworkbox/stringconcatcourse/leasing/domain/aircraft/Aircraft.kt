@@ -21,7 +21,7 @@ class Aircraft internal constructor(
     companion object {
         fun acquireNewAircraft(
             idGenerator: AircraftIdGenerator,
-            aircraftAlreadyExists: AircraftAlreadyExistsChecker,
+            aircraftAlreadyExists: AircraftAlreadyExists,
             model: AircraftModel,
             payloadCapacity: AircraftPayloadCapacity,
             registrationNumber: AircraftRegistrationNumber,

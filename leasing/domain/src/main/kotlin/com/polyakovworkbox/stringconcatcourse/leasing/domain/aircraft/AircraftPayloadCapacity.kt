@@ -6,7 +6,7 @@ import arrow.core.right
 import com.polyakovworkbox.stringconcatcourse.common.types.base.ValueObject
 import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 
-class AircraftPayloadCapacity internal constructor(val payloadCapacity: Int) : ValueObject {
+data class AircraftPayloadCapacity internal constructor(val payloadCapacity: Int) : ValueObject {
 
     companion object {
         fun from(payloadCapacity: Int): Either<NegativePayloadCapacity, AircraftPayloadCapacity> =
