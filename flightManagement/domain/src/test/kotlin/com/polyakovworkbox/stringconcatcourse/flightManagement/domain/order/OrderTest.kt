@@ -1,5 +1,7 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order
 
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.TicketIsAvailable
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.TicketIsBooked
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.email
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.orderItem
@@ -29,7 +31,7 @@ internal class OrderTest {
         val email = email()
         val orderItems = listOf(orderItem(), orderItem(), orderItem())
 
-        val result = Order.createOrder(idGenerator, email, orderItems)
+        val result = Order.createOrder(idGenerator, TicketIsAvailable, email, orderItems)
 
         result shouldBeRight {
             it.email shouldBe email
@@ -42,9 +44,19 @@ internal class OrderTest {
         val email = email()
         val orderItems = emptyList<OrderItem>()
 
-        val result = Order.createOrder(idGenerator, email, orderItems)
+        val result = Order.createOrder(idGenerator, TicketIsAvailable, email, orderItems)
 
-        result shouldBeLeft OrderIsEmptyError
+        result shouldBeLeft CannotCreateOrderError.OrderIsEmptyError
+    }
+
+    @Test
+    fun `create order - tickets are already booked`() {
+        val email = email()
+        val orderItems = listOf(orderItem(), orderItem(), orderItem())
+
+        val result = Order.createOrder(idGenerator, TicketIsBooked, email, orderItems)
+
+        result shouldBeLeft CannotCreateOrderError.TicketIsAlreadyBookedError
     }
 
     @Test

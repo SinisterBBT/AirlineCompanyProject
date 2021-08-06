@@ -25,6 +25,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Orde
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.OrderState
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Passenger
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.PassportData
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.TicketIsAlreadyBooked
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.FlightIsAnnounced
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Price
@@ -179,6 +180,14 @@ fun passenger(fullName: FullName = fullName(), passportData: PassportData = pass
         Passenger.from(fullName, passportData)
 
 // Order
+object TicketIsBooked : TicketIsAlreadyBooked {
+    override fun check(ticketId: TicketId) = true
+}
+
+object TicketIsAvailable : TicketIsAlreadyBooked {
+    override fun check(ticketId: TicketId) = false
+}
+
 fun orderId() = OrderId(Random.nextLong())
 
 fun email(emailString: String = defaultEmail()): Email {

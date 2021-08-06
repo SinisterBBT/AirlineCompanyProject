@@ -22,28 +22,33 @@ class Order internal constructor(
     companion object {
         fun createOrder(
             idGenerator: OrderIdGenerator,
+            ticketIsAlreadyBooked: TicketIsAlreadyBooked,
             email: Email,
             orderItems: List<OrderItem>
-        ): Either<OrderIsEmptyError, Order> {
-            return if (orderItems.isNotEmpty()) {
-                Order(
-                    idGenerator.generate(),
-                    email,
-                    orderItems,
-                    Version.new()
-                ).apply {
-                    addEvent(OrderCreatedDomainEvent(this.id))
-                }.right()
-            } else {
-                OrderIsEmptyError.left()
+        ): Either<CannotCreateOrderError, Order> {
+            return when {
+                orderItems.isEmpty() ->
+                    CannotCreateOrderError.OrderIsEmptyError.left()
+                orderItems.any { ticketIsAlreadyBooked.check(it.ticketId) } ->
+                    CannotCreateOrderError.TicketIsAlreadyBookedError.left()
+                else -> {
+                    Order(
+                        idGenerator.generate(),
+                        email,
+                        orderItems,
+                        Version.new()
+                    ).apply {
+                        addEvent(OrderCreatedDomainEvent(this.id))
+                    }.right()
+                }
             }
         }
     }
 
     fun totalPrice(): Price {
         return orderItems
-                .map { it.price }
-                .fold(Price.zero()) { total, it -> total.add(it) }
+            .map { it.price }
+            .fold(Price.zero()) { total, it -> total.add(it) }
     }
 
     fun pay() = changeState(OrderState.PAID, OrderPaidDomainEvent(id))
@@ -61,7 +66,10 @@ class Order internal constructor(
     }
 }
 
-object OrderIsEmptyError : BusinessError
+sealed class CannotCreateOrderError : BusinessError {
+    object OrderIsEmptyError : CannotCreateOrderError()
+    object TicketIsAlreadyBookedError : CannotCreateOrderError()
+}
 
 object InvalidState : BusinessError
 
