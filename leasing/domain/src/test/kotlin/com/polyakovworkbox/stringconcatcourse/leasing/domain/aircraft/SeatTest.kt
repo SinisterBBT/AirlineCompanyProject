@@ -22,7 +22,7 @@ class SeatTest {
     @Test
     fun `create aircraft model - success`() {
         val seatNumber = "A1"
-        val result: Either<EmptySeatNumberError, Seat> = Seat.from(seatNumber)
+        val result: Either<WrongSeatNumberFormatError, Seat> = Seat.from(seatNumber)
 
         result shouldBeRight {
             it.seatNumber shouldBe seatNumber
@@ -32,8 +32,8 @@ class SeatTest {
     @ParameterizedTest
     @ValueSource(strings = ["", " ", "A", "1", "A123", "a1", "AB", "_"])
     fun `create aircraft model - empty name`(input: String) {
-        val result: Either<EmptySeatNumberError, Seat> = Seat.from(input)
+        val result: Either<WrongSeatNumberFormatError, Seat> = Seat.from(input)
 
-        result shouldBeLeft EmptySeatNumberError
+        result shouldBeLeft WrongSeatNumberFormatError
     }
 }

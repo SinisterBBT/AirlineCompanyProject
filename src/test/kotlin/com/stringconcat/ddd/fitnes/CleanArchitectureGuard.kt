@@ -15,6 +15,7 @@ class CleanArchitectureGuard {
         Architectures.onionArchitecture()
             .domainModels("com.polyakovworkbox.stringconcatcourse.leasing.domain..")
             .domainServices("com.polyakovworkbox.stringconcatcourse.leasing.domain..")
+            .applicationServices("com.polyakovworkbox.stringconcatcourse.leasing.usecase..")
 
     @ArchIgnore
     @ArchTest
@@ -30,7 +31,6 @@ class CleanArchitectureGuard {
                     .domainModels("com.polyakovworkbox.stringconcatcourse.maintenance.domain..")
                     .domainServices("com.polyakovworkbox.stringconcatcourse.maintenance.domain..")
 
-    @ArchIgnore
     @ArchTest
     val `leasing business logic should depend only on approved packages` =
         ArchRuleDefinition.classes().that()

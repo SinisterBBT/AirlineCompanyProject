@@ -9,11 +9,11 @@ import com.polyakovworkbox.stringconcatcourse.common.types.error.BusinessError
 data class Seat internal constructor(val seatNumber: String) : ValueObject {
 
     companion object {
-        fun from(seatNumber: String): Either<EmptySeatNumberError, Seat> =
+        fun from(seatNumber: String): Either<WrongSeatNumberFormatError, Seat> =
                 if (seatNumber.isNotBlank() && hasOnlyValidSymbols(seatNumber)) {
                     Seat(seatNumber).right()
                 } else {
-                    EmptySeatNumberError.left()
+                    WrongSeatNumberFormatError.left()
                 }
 
         private fun hasOnlyValidSymbols(seatNumber: String): Boolean {
@@ -23,4 +23,4 @@ data class Seat internal constructor(val seatNumber: String) : ValueObject {
     }
 }
 
-object EmptySeatNumberError : BusinessError
+object WrongSeatNumberFormatError : BusinessError
