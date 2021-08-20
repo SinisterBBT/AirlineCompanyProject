@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 internal class PassengerTest {
 
     @Test
-    fun `Passenger is equal to other Passenger with the same value`() {
+    fun `is equal to other Passenger with the same value`() {
         val firstValue = passenger(fullName("Ivanov Ivan Ivanovich"), passportData("1234 123456"))
         val secondValue = passenger(fullName("Ivanov Ivan Ivanovich"), passportData("1234 123456"))
 

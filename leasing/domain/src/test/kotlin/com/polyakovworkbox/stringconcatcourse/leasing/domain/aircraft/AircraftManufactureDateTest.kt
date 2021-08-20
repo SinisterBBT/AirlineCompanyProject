@@ -11,7 +11,7 @@ import java.time.Month
 class AircraftManufactureDateTest {
 
     @Test
-    fun `AircraftManufactureDate is equal to other AircraftManufactureDate with the same value`() {
+    fun `is equal to other AircraftManufactureDate with the same value`() {
         val manufactureDate = LocalDate.of(2010, Month.APRIL, 1)
         val firstValue = aircraftManufactureDate(manufactureDate)
         val secondValue = aircraftManufactureDate(manufactureDate)

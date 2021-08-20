@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource
 class AircraftModelTest {
 
     @Test
-    fun `AircraftModel is equal to other AircraftModel with the same value`() {
+    fun `is equal to other AircraftModel with the same value`() {
         val name = "Airbus0000"
         val firstValue = aircraftModel(name)
         val secondValue = aircraftModel(name)

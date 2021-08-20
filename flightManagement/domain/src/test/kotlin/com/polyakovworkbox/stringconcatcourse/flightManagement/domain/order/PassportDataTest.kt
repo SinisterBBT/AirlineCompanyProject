@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource
 internal class PassportDataTest {
 
     @Test
-    fun `PassportData is equal to other PassportData with the same value`() {
+    fun `is equal to other PassportData with the same value`() {
         val passportData = "1234 123456"
         val firstValue = passportData(passportData)
         val secondValue = passportData(passportData)

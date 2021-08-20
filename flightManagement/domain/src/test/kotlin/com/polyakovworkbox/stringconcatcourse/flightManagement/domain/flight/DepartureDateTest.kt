@@ -11,7 +11,7 @@ import java.time.ZonedDateTime
 internal class DepartureDateTest {
 
     @Test
-    fun `DepartureDate is equal to other DepartureDate with the same value`() {
+    fun `is equal to other DepartureDate with the same value`() {
         val departureDate = defaultDepartureDate()
         val firstValue = departureDate(departureDate)
         val secondValue = departureDate(departureDate)

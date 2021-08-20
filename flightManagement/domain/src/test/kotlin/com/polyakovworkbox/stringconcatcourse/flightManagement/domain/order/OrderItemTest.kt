@@ -13,7 +13,7 @@ import java.math.BigDecimal
 internal class OrderItemTest {
 
     @Test
-    fun `OrderItem is equal to other OrderItem with the same value`() {
+    fun `is equal to other OrderItem with the same value`() {
         val passenger = passenger(fullName("Ivanov Ivan Ivanovich"), passportData("1234 123456"))
         val ticketId = ticketId(1234567890)
         val price = price(BigDecimal("12.49"))

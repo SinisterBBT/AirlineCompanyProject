@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 class AircraftSeatMapTest {
 
     @Test
-    fun `AircraftSeatMap is equal to other AircraftSeatMap with the same value`() {
+    fun `is equal to other AircraftSeatMap with the same value`() {
         val firstValue = seatMap()
         val secondValue = seatMap()
 

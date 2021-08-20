@@ -12,7 +12,7 @@ import java.time.ZonedDateTime
 internal class ArrivalDateTest {
 
     @Test
-    fun `ArrivalDate is equal to other ArrivalDate with the same value`() {
+    fun `is equal to other ArrivalDate with the same value`() {
         val arrivalDate = defaultArrivalDate()
         val firstValue = arrivalDate(arrivalDate)
         val secondValue = arrivalDate(arrivalDate)
