@@ -10,7 +10,7 @@ import java.time.Duration
 internal class FlightTimeTest {
 
     @Test
-    fun `FlightTimeTest is equal to other FlightTimeTest with the same value`() {
+    fun `is equal to other FlightTime with the same value`() {
         val flightTime = Duration.ofHours(5)
         val firstValue = flightTime(flightTime)
         val secondValue = flightTime(flightTime)

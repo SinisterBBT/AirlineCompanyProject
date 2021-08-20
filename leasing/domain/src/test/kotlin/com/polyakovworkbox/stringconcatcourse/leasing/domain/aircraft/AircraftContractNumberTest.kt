@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource
 class AircraftContractNumberTest {
 
     @Test
-    fun `AircraftContractNumber is equal to other AircraftContractNumber with the same value`() {
+    fun `is equal to other AircraftContractNumber with the same value`() {
         val contractNumber = "123-45"
         val firstValue = aircraftContractNumber(contractNumber)
         val secondValue = aircraftContractNumber(contractNumber)

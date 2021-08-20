@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource
 internal class FullNameTest {
 
     @Test
-    fun `FullName is equal to other FullName with the same value`() {
+    fun `is equal to other FullName with the same value`() {
         val firstValue = fullName("Ivanov Ivan Ivanovich")
         val secondValue = fullName("Ivanov Ivan Ivanovich")
 

@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource
 internal class EmailTest {
 
     @Test
-    fun `Email is equal to other Email with the same value`() {
+    fun `is equal to other Email with the same value`() {
         val firstValue = email("some@email.com")
         val secondValue = email("some@email.com")
 

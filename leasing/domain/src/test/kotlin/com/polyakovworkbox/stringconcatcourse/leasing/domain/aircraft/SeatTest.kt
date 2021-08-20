@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource
 class SeatTest {
 
     @Test
-    fun `Seat is equal to other Seat with the same value`() {
+    fun `is equal to other Seat with the same value`() {
         val firstValue = seat()
         val secondValue = seat()
 

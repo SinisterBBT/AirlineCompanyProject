@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class AircraftPayloadCapacityTest {
 
     @Test
-    fun `AircraftPayloadCapacity is equal to other AircraftPayloadCapacity with the same value`() {
+    fun `is equal to other AircraftPayloadCapacity with the same value`() {
         val payloadCapacity = 100500
         val firstValue = payloadCapacity(payloadCapacity)
         val secondValue = payloadCapacity(payloadCapacity)

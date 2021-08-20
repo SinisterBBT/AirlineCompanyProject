@@ -17,7 +17,7 @@ import java.time.Month
 internal class AcquireNewAircraftRequestTest {
 
     @Test
-    fun `AcquireNewAircraftRequest is equal to another one with the same parameters`() {
+    fun `is equal to another one with the same parameters`() {
         val model = aircraftModel("Airbus0000")
         val payloadCapacity = payloadCapacity(100500)
         val registrationNumber = aircraftRegistrationNumber("123-456-abc-DEF")
@@ -47,7 +47,7 @@ internal class AcquireNewAircraftRequestTest {
     }
 
     @Test
-    fun `AcquireNewAircraftRequest is created successfully`() {
+    fun `is created successfully`() {
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
         val registrationNumber = aircraftRegistrationNumber()
@@ -85,7 +85,7 @@ internal class AcquireNewAircraftRequestTest {
     }
 
     @Test
-    fun `AcquireNewAircraftRequest has empty model value`() {
+    fun `has empty model value`() {
         val model = ""
         val payloadCapacity = payloadCapacity()
         val registrationNumber = aircraftRegistrationNumber()
@@ -106,7 +106,7 @@ internal class AcquireNewAircraftRequestTest {
     }
 
     @Test
-    fun `AcquireNewAircraftRequest has negative payload capacity value`() {
+    fun `has negative payload capacity value`() {
         val model = aircraftModel()
         val payloadCapacity = -1
         val registrationNumber = aircraftRegistrationNumber()
@@ -127,7 +127,7 @@ internal class AcquireNewAircraftRequestTest {
     }
 
     @Test
-    fun `AcquireNewAircraftRequest has empty registration number value`() {
+    fun `has empty registration number value`() {
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
         val registrationNumber = ""
@@ -148,7 +148,7 @@ internal class AcquireNewAircraftRequestTest {
     }
 
     @Test
-    fun `AcquireNewAircraftRequest has empty seat map layout`() {
+    fun `has empty seat map layout`() {
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
         val registrationNumber = aircraftRegistrationNumber()
@@ -169,7 +169,7 @@ internal class AcquireNewAircraftRequestTest {
     }
 
     @Test
-    fun `AcquireNewAircraftRequest has wrong seat format in seat map layout`() {
+    fun `has wrong seat format in seat map layout`() {
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
         val registrationNumber = aircraftRegistrationNumber()
@@ -190,7 +190,7 @@ internal class AcquireNewAircraftRequestTest {
     }
 
     @Test
-    fun `AcquireNewAircraftRequest has empty contract number value`() {
+    fun `has empty contract number value`() {
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
         val registrationNumber = aircraftRegistrationNumber()
@@ -211,7 +211,7 @@ internal class AcquireNewAircraftRequestTest {
     }
 
     @Test
-    fun `AcquireNewAircraftRequest has manufacture date value in the future`() {
+    fun `has manufacture date value in the future`() {
         val model = aircraftModel()
         val payloadCapacity = payloadCapacity()
         val registrationNumber = aircraftRegistrationNumber()
