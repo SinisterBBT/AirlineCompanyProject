@@ -5,6 +5,7 @@ include(":flightManagement:domain")
 include(":maintenance:domain")
 
 include(":leasing:usecase")
+include(":flightManagement:usecase")
 
 include(":mainApp")
 include(":common:types")

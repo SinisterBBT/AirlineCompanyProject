@@ -20,9 +20,10 @@ class CleanArchitectureGuard {
     @ArchIgnore
     @ArchTest
     val `onion architecture should be followed for flightManagement` =
-            Architectures.onionArchitecture()
-                    .domainModels("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
-                    .domainServices("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
+        Architectures.onionArchitecture()
+            .domainModels("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
+            .domainServices("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
+            .applicationServices("com.polyakovworkbox.stringconcatcourse.flightManagement.usecase..")
 
     @ArchIgnore
     @ArchTest
