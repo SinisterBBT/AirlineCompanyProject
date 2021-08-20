@@ -13,7 +13,7 @@ class Aircraft internal constructor(
 ) : AggregateRoot<AircraftId>(id, version) {
 
     companion object {
-        fun acquireNewAircraft(
+        fun receiveNewAircraftInfo(
             idGenerator: AircraftIdGenerator,
             registrationNumber: AircraftRegistrationNumber,
             model: AircraftModel,

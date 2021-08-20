@@ -4,6 +4,7 @@ import arrow.core.Either
 import com.polyakovworkbox.stringconcatcourse.leasing.domain.aircraft.AircraftId
 
 interface AcquireNewAircraft {
+
     fun execute(request: AcquireNewAircraftRequest): Either<AcquireNewAircraftCaseError, AircraftId>
 }
 

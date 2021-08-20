@@ -21,7 +21,7 @@ internal class AircraftTest {
         val model = aircraftModel()
         val seatMap = seatCount()
 
-        val result = Aircraft.acquireNewAircraft(
+        val result = Aircraft.receiveNewAircraftInfo(
                 idGenerator,
                 registrationNumber,
                 model,
