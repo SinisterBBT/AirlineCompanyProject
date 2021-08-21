@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test
 internal class AnnounceNewFlightUseCaseTest {
 
     @Test
-    fun `successfully added`() {
+    fun `successfully announced`() {
         val departureAirport = departureAirport()
         val arrivalAirport = arrivalAirport()
         val departureDate = departureDate()

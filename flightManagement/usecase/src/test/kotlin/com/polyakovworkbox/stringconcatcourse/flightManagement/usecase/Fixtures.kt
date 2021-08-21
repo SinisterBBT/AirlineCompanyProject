@@ -11,8 +11,17 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Arr
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.DepartureDate
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.Flight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightId
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.FlightIdGenerator
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Price
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Ticket
+import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.aircraft.AircraftInfoPersister
+import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.flight.AircraftIsInOperation
+import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.flight.AircraftIsNotInFlight
+import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.flight.AirportAllowsFlight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.flight.FlightPersister
+import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.ticket.TicketPersister
+import java.math.BigDecimal
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import kotlin.random.Random
@@ -80,4 +89,44 @@ class TestFlightPersister : HashMap<FlightId, Flight>(), FlightPersister {
     override fun save(flight: Flight) {
         this[flight.id] = flight
     }
+}
+
+// Ticket aggregate
+fun ticketId(ticketId: Long = Random.nextLong()) = TicketId(ticketId)
+
+fun price(value: BigDecimal = BigDecimal(Random.nextInt(1, 500000))): Price {
+    val result = Price.from(value)
+    check(result is Either.Right<Price>)
+    return result.b
+}
+
+class TestTicketPersister : HashMap<TicketId, Ticket>(), TicketPersister {
+    override fun save(ticket: Ticket) {
+        this[ticket.id] = ticket
+    }
+}
+
+val flightIdGenerator = object : FlightIdGenerator {
+    override fun generate() = flightId()
+}
+
+class FlightIdPseudoGenerator(val flightId: FlightId) : FlightIdGenerator {
+    override fun generate() = flightId
+}
+
+fun flight(departureDate: DepartureDate = departureDate(defaultDepartureDate()), flightId: FlightId?): Flight {
+    val result = Flight.announceNewFlight(
+        if (flightId == null) flightIdGenerator else FlightIdPseudoGenerator(flightId),
+        AircraftIsInOperation,
+        AircraftIsNotInFlight,
+        AirportAllowsFlight,
+        departureAirport(),
+        arrivalAirport(),
+        departureDate,
+        arrivalDate(departureDate.departureDate.plusHours(10)),
+        aircraftId()
+    )
+
+    check(result is Either.Right<Flight>)
+    return result.b
 }

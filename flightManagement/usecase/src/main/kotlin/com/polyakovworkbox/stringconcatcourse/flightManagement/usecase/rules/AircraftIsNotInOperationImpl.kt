@@ -4,7 +4,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.A
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.flight.AircraftIsNotInOperation
 import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.aircraft.AircraftInfoExtractor
 
-class AircraftIsNotInOperation(
+class AircraftIsNotInOperationImpl(
     private val extractor: AircraftInfoExtractor
 ) : AircraftIsNotInOperation {
 

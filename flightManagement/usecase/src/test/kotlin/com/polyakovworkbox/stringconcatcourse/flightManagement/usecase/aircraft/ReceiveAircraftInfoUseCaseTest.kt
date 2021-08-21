@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 internal class ReceiveAircraftInfoUseCaseTest {
 
     @Test
-    fun `successfully added`() {
+    fun `successfully received`() {
         val registrationNumber = aircraftRegistrationNumber()
         val model = aircraftModel()
         val seatCount = seatCount()
