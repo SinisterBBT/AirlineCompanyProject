@@ -8,7 +8,7 @@ import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-internal class ReceiveAircraftInfoRequestTest {
+internal class ReceiveAircraftRequestTest {
 
     @Test
     fun `is equal to another one with the same parameters`() {
@@ -16,13 +16,13 @@ internal class ReceiveAircraftInfoRequestTest {
         val registrationNumber = aircraftRegistrationNumber("123-456-abc-DEF")
         val seatCount = seatCount(66)
 
-        val result = ReceiveAircraftInfoRequest.from(
+        val result = ReceiveAircraftRequest.from(
             model.value,
             registrationNumber.registrationNumber,
             seatCount.value
         )
 
-        val result2 = ReceiveAircraftInfoRequest.from(
+        val result2 = ReceiveAircraftRequest.from(
             model.value,
             registrationNumber.registrationNumber,
             seatCount.value
@@ -37,13 +37,13 @@ internal class ReceiveAircraftInfoRequestTest {
         val model = aircraftModel()
         val seatCount = seatCount()
 
-        val result = ReceiveAircraftInfoRequest.from(
+        val result = ReceiveAircraftRequest.from(
             registrationNumber.registrationNumber,
             model.value,
             seatCount.value
         )
 
-        val compareToInstance = ReceiveAircraftInfoRequest(
+        val compareToInstance = ReceiveAircraftRequest(
             registrationNumber,
             model,
             seatCount
@@ -62,13 +62,13 @@ internal class ReceiveAircraftInfoRequestTest {
         val model = aircraftModel()
         val seatCount = seatCount()
 
-        val result = ReceiveAircraftInfoRequest.from(
+        val result = ReceiveAircraftRequest.from(
             registrationNumber,
             model.value,
             seatCount.value
         )
 
-        result shouldBeLeft InvalidAircraftInfoParameters("Registration number cannot be empty")
+        result shouldBeLeft InvalidAircraftParameters("Registration number cannot be empty")
     }
 
     @Test
@@ -77,13 +77,13 @@ internal class ReceiveAircraftInfoRequestTest {
         val model = ""
         val seatCount = seatCount()
 
-        val result = ReceiveAircraftInfoRequest.from(
+        val result = ReceiveAircraftRequest.from(
             registrationNumber.registrationNumber,
             model,
             seatCount.value
         )
 
-        result shouldBeLeft InvalidAircraftInfoParameters("Aircraft model cannot be empty")
+        result shouldBeLeft InvalidAircraftParameters("Aircraft model cannot be empty")
     }
 
     @Test
@@ -92,12 +92,12 @@ internal class ReceiveAircraftInfoRequestTest {
         val model = aircraftModel()
         val seatCount = -5
 
-        val result = ReceiveAircraftInfoRequest.from(
+        val result = ReceiveAircraftRequest.from(
             registrationNumber.registrationNumber,
             model.value,
             seatCount
         )
 
-        result shouldBeLeft InvalidAircraftInfoParameters("Seat count cannot be negative")
+        result shouldBeLeft InvalidAircraftParameters("Seat count cannot be negative")
     }
 }

@@ -9,7 +9,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.A
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.EmptyAircraftModelError
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.EmptyRegistrationNumberError
 
-data class ReceiveAircraftInfoRequest internal constructor(
+data class ReceiveAircraftRequest internal constructor(
     val registrationNumber: AircraftRegistrationNumber,
     val model: AircraftModel,
     val seatCount: Count
@@ -19,20 +19,20 @@ data class ReceiveAircraftInfoRequest internal constructor(
             registrationNumber: String,
             model: String,
             seatCount: Int
-        ): Either<InvalidAircraftInfoParameters, ReceiveAircraftInfoRequest> {
+        ): Either<InvalidAircraftParameters, ReceiveAircraftRequest> {
             return tupled(
                 AircraftRegistrationNumber.from(registrationNumber).mapLeft { it.toError() },
                 AircraftModel.from(model).mapLeft { it.toError() },
                 Count.from(seatCount).mapLeft { it.toError() }
             ).map {
-                params -> ReceiveAircraftInfoRequest(params.a, params.b, params.c)
+                params -> ReceiveAircraftRequest(params.a, params.b, params.c)
             }
         }
     }
 }
 
-data class InvalidAircraftInfoParameters(val message: String)
+data class InvalidAircraftParameters(val message: String)
 
-fun EmptyRegistrationNumberError.toError() = InvalidAircraftInfoParameters("Registration number cannot be empty")
-fun EmptyAircraftModelError.toError() = InvalidAircraftInfoParameters("Aircraft model cannot be empty")
-fun NegativeValueError.toError() = InvalidAircraftInfoParameters("Seat count cannot be negative")
+fun EmptyRegistrationNumberError.toError() = InvalidAircraftParameters("Registration number cannot be empty")
+fun EmptyAircraftModelError.toError() = InvalidAircraftParameters("Aircraft model cannot be empty")
+fun NegativeValueError.toError() = InvalidAircraftParameters("Seat count cannot be negative")

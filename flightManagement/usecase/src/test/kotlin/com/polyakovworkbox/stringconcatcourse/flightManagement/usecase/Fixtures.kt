@@ -25,7 +25,7 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.order.Pass
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Price
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.Ticket
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.ticket.TicketId
-import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.aircraft.AircraftInfoPersister
+import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.aircraft.AircraftPersister
 import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.flight.AircraftIsInOperation
 import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.flight.AircraftIsNotInFlight
 import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.flight.AirportAllowsFlight
@@ -60,7 +60,7 @@ fun aircraftRegistrationNumber(regNum: String = "R-Number ${Random.nextInt()}"):
 }
 
 // Aircraft persister
-class TestAircraftInfoPersister : HashMap<AircraftId, Aircraft>(), AircraftInfoPersister {
+class TestAircraftPersister : HashMap<AircraftId, Aircraft>(), AircraftPersister {
     override fun save(aircraft: Aircraft) {
         this[aircraft.id] = aircraft
     }

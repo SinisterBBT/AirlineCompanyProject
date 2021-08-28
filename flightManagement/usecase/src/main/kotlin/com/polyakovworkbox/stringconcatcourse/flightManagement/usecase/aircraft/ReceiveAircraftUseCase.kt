@@ -4,19 +4,19 @@ import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.A
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftIdGenerator
 
-class ReceiveAircraftInfoUseCase(
-    private val aircraftInfoPersister: AircraftInfoPersister,
+class ReceiveAircraftUseCase(
+    private val aircraftPersister: AircraftPersister,
     private val idGenerator: AircraftIdGenerator,
-) : ReceiveAircraftInfo {
+) : ReceiveAircraft {
 
-    override fun execute(request: ReceiveAircraftInfoRequest): AircraftId {
-        return Aircraft.receiveNewAircraftInfo(
+    override fun execute(request: ReceiveAircraftRequest): AircraftId {
+        return Aircraft.receiveNewAircraft(
             idGenerator,
             request.registrationNumber,
             request.model,
             request.seatCount
         ).let {
-            aircraftInfoPersister.save(it)
+            aircraftPersister.save(it)
             it.id
         }
     }

@@ -13,7 +13,7 @@ class Aircraft internal constructor(
 ) : AggregateRoot<AircraftId>(id, version) {
 
     companion object {
-        fun receiveNewAircraftInfo(
+        fun receiveNewAircraft(
             idGenerator: AircraftIdGenerator,
             registrationNumber: AircraftRegistrationNumber,
             model: AircraftModel,
@@ -26,7 +26,7 @@ class Aircraft internal constructor(
                     seatCount,
                     Version.new()
                 ).apply {
-                    addEvent(AircraftInfoAcquiredEvent(this.id))
+                    addEvent(AircraftAcquiredEvent(this.id))
                 }
         }
     }

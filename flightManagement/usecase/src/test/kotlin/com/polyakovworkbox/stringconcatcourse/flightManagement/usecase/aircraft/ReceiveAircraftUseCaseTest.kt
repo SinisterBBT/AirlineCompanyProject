@@ -1,7 +1,7 @@
 package com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.aircraft
 
 import com.polyakovworkbox.stringconcatcourse.flightManagement.domain.aircraft.AircraftIdGenerator
-import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.TestAircraftInfoPersister
+import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.TestAircraftPersister
 import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.aircraftId
 import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.aircraftModel
 import com.polyakovworkbox.stringconcatcourse.flightManagement.usecase.aircraftRegistrationNumber
@@ -10,7 +10,7 @@ import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-internal class ReceiveAircraftInfoUseCaseTest {
+internal class ReceiveAircraftUseCaseTest {
 
     @Test
     fun `successfully received`() {
@@ -18,14 +18,14 @@ internal class ReceiveAircraftInfoUseCaseTest {
         val model = aircraftModel()
         val seatCount = seatCount()
 
-        val aircraftInfoPersister = TestAircraftInfoPersister()
+        val aircraftPersister = TestAircraftPersister()
         val id = TestAircraftIdGenerator.id
 
-        val result = ReceiveAircraftInfoUseCase(
-            aircraftInfoPersister,
+        val result = ReceiveAircraftUseCase(
+            aircraftPersister,
             TestAircraftIdGenerator
         ).execute(
-            ReceiveAircraftInfoRequest(
+            ReceiveAircraftRequest(
                 registrationNumber,
                 model,
                 seatCount
@@ -34,12 +34,12 @@ internal class ReceiveAircraftInfoUseCaseTest {
 
         result.value shouldBe id.value
 
-        val aircraftInfo = aircraftInfoPersister[id]
-        aircraftInfo.shouldNotBeNull()
+        val aircraft = aircraftPersister[id]
+        aircraft.shouldNotBeNull()
 
-        aircraftInfo.registrationNumber shouldBe registrationNumber
-        aircraftInfo.model shouldBe model
-        aircraftInfo.seatCount shouldBe seatCount
+        aircraft.registrationNumber shouldBe registrationNumber
+        aircraft.model shouldBe model
+        aircraft.seatCount shouldBe seatCount
     }
 }
 
