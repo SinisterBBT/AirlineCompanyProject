@@ -31,15 +31,15 @@ data class CreateOrderRequest internal constructor(
                     orderItemsParams -> OrderItem.from(
                         Passenger.from(
                             FullName.from(orderItemsParams.fullBuyerName).getOrElse {
-                                return EmptyFioError.toError().left()
+                                return@from EmptyFioError.toError().left()
                             },
                             PassportData.from(orderItemsParams.buyerPassportData).getOrElse {
-                                return EmptyPassportDataError.toError().left()
+                                return@from EmptyPassportDataError.toError().left()
                             }
                         ),
                         TicketId(orderItemsParams.ticketId),
                         Price.from(orderItemsParams.ticketPrice).getOrElse {
-                            return InvalidOrderParameters("Price has invalid format").left()
+                            return@from InvalidOrderParameters("Price has invalid format").left()
                         }
                     )
                 }
