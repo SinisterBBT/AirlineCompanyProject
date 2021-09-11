@@ -20,16 +20,18 @@ class CleanArchitectureGuard {
     @ArchIgnore
     @ArchTest
     val `onion architecture should be followed for flightManagement` =
-            Architectures.onionArchitecture()
-                    .domainModels("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
-                    .domainServices("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
+        Architectures.onionArchitecture()
+            .domainModels("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
+            .domainServices("com.polyakovworkbox.stringconcatcourse.flightManagement.domain..")
+            .applicationServices("com.polyakovworkbox.stringconcatcourse.flightManagement.usecase..")
 
     @ArchIgnore
     @ArchTest
     val `onion architecture should be followed for maintenance` =
             Architectures.onionArchitecture()
-                    .domainModels("com.polyakovworkbox.stringconcatcourse.maintenance.domain..")
-                    .domainServices("com.polyakovworkbox.stringconcatcourse.maintenance.domain..")
+                .domainModels("com.polyakovworkbox.stringconcatcourse.maintenance.domain..")
+                .domainServices("com.polyakovworkbox.stringconcatcourse.maintenance.domain..")
+                .applicationServices("com.polyakovworkbox.stringconcatcourse.maintenance.usecase..")
 
     @ArchTest
     val `leasing business logic should depend only on approved packages` =

@@ -16,12 +16,12 @@ internal class AircraftTest {
     }
 
     @Test
-    fun `acquire info about new aircraft - success`() {
+    fun `acquire new aircraft - success`() {
         val registrationNumber = aircraftRegistrationNumber()
         val model = aircraftModel()
         val seatMap = seatCount()
 
-        val result = Aircraft.acquireNewAircraft(
+        val result = Aircraft.receiveNewAircraft(
                 idGenerator,
                 registrationNumber,
                 model,

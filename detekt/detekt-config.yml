@@ -2,7 +2,6 @@ style:
   NewLineAtEndOfFile:
     active: false
 
-
 complexity:
   LongParameterList:
     functionThreshold: 12
